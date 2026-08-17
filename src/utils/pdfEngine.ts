@@ -698,9 +698,9 @@ export const PAPER_DIMENSIONS: Record<string, [number, number]> = {
   'Tabloid': [792.0, 1224.0]
 };
 
-export async function nUpPdf(buffer: ArrayBuffer, pagesPerSheet: 2 | 4 | 8 = 2): Promise<Uint8Array> {
+export async function nUpPdf(buffer: ArrayBuffer, pagesPerSheet: 2 | 4 | 6 | 8 | 9 | 16 = 2): Promise<Uint8Array> {
   return await nUpAdvancedPdf(buffer, {
-    pagesPerSheet: pagesPerSheet === 8 ? 8 : (pagesPerSheet === 4 ? 4 : 2),
+    pagesPerSheet,
     paperSize: 'A4',
     orientation: 'portrait',
     margin: 20,
