@@ -19,12 +19,13 @@ if (fs.existsSync(envDeployPath)) {
   dotenv.config({ path: envPath });
 }
 
-const host = process.env.HOSTINGER_FTP_HOST;
+const rawHost = process.env.HOSTINGER_FTP_HOST || '';
+const host = rawHost.replace(/^ftp:\/\//i, '').replace(/\/+$/, '');
 const user = process.env.HOSTINGER_FTP_USER;
 const password = process.env.HOSTINGER_FTP_PASSWORD;
 const port = parseInt(process.env.HOSTINGER_FTP_PORT || '21', 10);
 const remoteDir = process.env.HOSTINGER_REMOTE_DIR || 'public_html';
-const secure = process.env.HOSTINGER_FTP_SECURE === 'true' || process.env.HOSTINGER_FTP_SECURE === undefined;
+const secure = process.env.HOSTINGER_FTP_SECURE === 'true';
 
 console.log('\n🚀 ===============================================');
 console.log('   Avatar PDF — Hostinger 1-Click Terminal Deploy');
