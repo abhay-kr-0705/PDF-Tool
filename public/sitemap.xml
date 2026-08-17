@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Landing & Info Pages -->
+  <url><loc>https://docuvortix.app/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://docuvortix.app/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/privacy</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/terms</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://docuvortix.app/faq</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://docuvortix.app/sitemap</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Popular Conversion & Optimization Tools -->
+  <url><loc>https://docuvortix.app/word-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/pdf-to-word</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/compress-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/merge-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/split-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/edit-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/edit-scanned-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/excel-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/pdf-to-excel</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/powerpoint-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/pdf-to-powerpoint</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/pdf-to-image</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/image-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/pdf-to-html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/html-to-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/rotate-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/crop-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/organize-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/delete-pages</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/extract-pages</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/protect-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/unlock-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/watermark-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/page-numbers</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/sign-pdf</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://docuvortix.app/redact-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/flatten-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/grayscale-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/invert-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/compare-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/form-filler</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/pdf-metadata</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/n-up-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/extract-images</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/repair-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/pdf-to-text</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/text-to-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/markdown-to-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/code-to-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/deskew-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://docuvortix.app/resize-pdf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>
