@@ -4,10 +4,10 @@ import { FileDropzone } from '../common/FileDropzone';
 import { PageGridSelector } from '../common/PageGridSelector';
 import { ProcessingOverlay } from '../common/ProcessingOverlay';
 import { ResultView } from '../common/ResultView';
-import { generatePdfThumbnails, splitPdf } from '../../utils/pdfEngine';
+import { generatePdfThumbnails, splitPdf, extractPdfPages } from '../../utils/pdfEngine';
 import { downloadUint8Array, downloadBlob, fileToArrayBuffer, parsePageRange } from '../../utils/fileHelpers';
 import JSZip from 'jszip';
-import { Scissors, Layers, CheckCircle2 } from 'lucide-react';
+import { Scissors, Layers, CheckCircle2, Trash2 } from 'lucide-react';
 
 interface SplitToolProps {
   tool: ToolDefinition;
@@ -16,7 +16,7 @@ interface SplitToolProps {
 export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [pages, setPages] = useState<PdfPagePreview[]>([]);
-  const [splitMode, setSplitMode] = useState<'range' | 'all' | 'visual'>('range');
+  const [splitMode, setSplitMode] = useState<'visual' | 'range' | 'all'>('visual');
   const [rangeInput, setRangeInput] = useState('1-2, 3-4');
   
   const [isProcessing, setIsProcessing] = useState(false);
@@ -36,7 +36,7 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
   const loadThumbnails = async () => {
     try {
       const buffer = await fileToArrayBuffer(files[0].file);
-      const thumbs = await generatePdfThumbnails(buffer, 30);
+      const thumbs = await generatePdfThumbnails(buffer, 60);
       setPages(thumbs);
       setRangeInput(`1-${Math.min(2, thumbs.length)}, ${Math.min(3, thumbs.length)}-${thumbs.length}`);
     } catch (e) {
@@ -46,6 +46,10 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
 
   const handlePageToggle = (pageNumber: number) => {
     setPages(pages.map(p => p.pageNumber === pageNumber ? { ...p, selected: !p.selected } : p));
+  };
+
+  const handlePageDelete = (pageNumber: number) => {
+    setPages(pages.filter(p => p.pageNumber !== pageNumber));
   };
 
   const handleSplit = async () => {
@@ -60,19 +64,29 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
       let rangesToSplit: number[][] = [];
 
       if (splitMode === 'all') {
-        // Every single page
+        // Every single page into separate files
         rangesToSplit = Array.from({ length: totalPages }, (_, i) => [i + 1]);
       } else if (splitMode === 'visual') {
-        // Selected pages
+        // Selected pages (removing unselected pages)
         const selected = pages.filter(p => p.selected).map(p => p.pageNumber);
         if (selected.length === 0) {
           alert('Please select at least one page.');
           setIsProcessing(false);
           return;
         }
-        rangesToSplit = [selected];
+        
+        setProgress(60);
+        setStatusText('Extracting selected pages and removing unselected...');
+        const extractedBytes = await extractPdfPages(buffer, selected);
+        setSinglePdfResult({
+          name: `${files[0].name.replace(/\.[^/.]+$/, '')}_selected_pages.pdf`,
+          data: extractedBytes
+        });
+        setProgress(100);
+        setIsProcessing(false);
+        return;
       } else {
-        // Parse range input like "1-3, 5, 7-10"
+        // Range syntax
         const parts = rangeInput.split(',');
         for (const part of parts) {
           const parsed = parsePageRange(part.trim(), totalPages);
@@ -88,7 +102,6 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
       if (splitResults.length === 1) {
         setSinglePdfResult({ name: splitResults[0].filename, data: splitResults[0].data });
       } else {
-        // Zip all files
         const zip = new JSZip();
         splitResults.forEach(res => {
           zip.file(res.filename, res.data);
@@ -123,7 +136,7 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-5xl mx-auto space-y-8">
       {resultZip || singlePdfResult ? (
         <ResultView
           filename={singlePdfResult ? singlePdfResult.name : 'split_documents.zip'}
@@ -135,57 +148,58 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
       ) : isProcessing ? (
         <ProcessingOverlay progress={progress} statusText={statusText} />
       ) : (
-        <div className="glass-card rounded-2xl p-6 sm:p-10 shadow-lg border border-slate-200/80 dark:border-slate-800 space-y-8">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg space-y-6">
           <FileDropzone
             acceptedFiles=".pdf"
             allowMultiple={false}
             files={files}
             onFilesChange={setFiles}
-            title="Upload PDF to Split"
-            description="Select the document you want to extract pages from"
+            title="Upload PDF to Split or Remove Pages"
+            description="Select which pages to keep, remove unwanted pages, or split into separate files"
           />
 
           {files.length > 0 && (
             <div className="space-y-6 pt-4 border-t border-slate-200 dark:border-slate-800 animate-in fade-in">
-              {/* Split Mode Selector */}
+              
+              {/* Split Mode Tabs */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setSplitMode('visual')}
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
+                    splitMode === 'visual' ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/40 font-bold' : 'border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  <div className="text-xs font-bold text-slate-900 dark:text-white">Visual Page Selector</div>
+                  <div className="text-[11px] text-slate-500 font-normal mt-0.5">Click thumbnails to keep or remove</div>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => setSplitMode('range')}
                   className={`p-4 rounded-xl border-2 text-left transition-all ${
-                    splitMode === 'range' ? 'border-indigo-500 bg-indigo-50/40 dark:bg-indigo-950/30 font-bold' : 'border-slate-200 dark:border-slate-800'
+                    splitMode === 'range' ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/40 font-bold' : 'border-slate-200 dark:border-slate-700'
                   }`}
                 >
-                  <div className="text-sm">Custom Ranges</div>
-                  <div className="text-xs text-slate-500 font-normal mt-0.5">e.g. 1-3, 5, 7-10</div>
+                  <div className="text-xs font-bold text-slate-900 dark:text-white">Custom Ranges</div>
+                  <div className="text-[11px] text-slate-500 font-normal mt-0.5">e.g. 1-3, 5, 7-10</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setSplitMode('all')}
                   className={`p-4 rounded-xl border-2 text-left transition-all ${
-                    splitMode === 'all' ? 'border-indigo-500 bg-indigo-50/40 dark:bg-indigo-950/30 font-bold' : 'border-slate-200 dark:border-slate-800'
+                    splitMode === 'all' ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/40 font-bold' : 'border-slate-200 dark:border-slate-700'
                   }`}
                 >
-                  <div className="text-sm">Extract All Pages</div>
-                  <div className="text-xs text-slate-500 font-normal mt-0.5">1 separate file per page</div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSplitMode('visual')}
-                  className={`p-4 rounded-xl border-2 text-left transition-all ${
-                    splitMode === 'visual' ? 'border-indigo-500 bg-indigo-50/40 dark:bg-indigo-950/30 font-bold' : 'border-slate-200 dark:border-slate-800'
-                  }`}
-                >
-                  <div className="text-sm">Visual Page Picker</div>
-                  <div className="text-xs text-slate-500 font-normal mt-0.5">Click thumbnails below</div>
+                  <div className="text-xs font-bold text-slate-900 dark:text-white">Extract All Pages</div>
+                  <div className="text-[11px] text-slate-500 font-normal mt-0.5">1 separate file per page</div>
                 </button>
               </div>
 
               {/* Range Input box */}
               {splitMode === 'range' && (
-                <div className="space-y-2">
+                <div className="space-y-2 text-left">
                   <label className="font-semibold text-xs text-slate-700 dark:text-slate-300">
                     Enter Page Ranges (comma separated)
                   </label>
@@ -194,27 +208,36 @@ export const SplitTool: React.FC<SplitToolProps> = ({ tool }) => {
                     value={rangeInput}
                     onChange={(e) => setRangeInput(e.target.value)}
                     placeholder="e.g. 1-2, 3-5, 8"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
                   />
                 </div>
               )}
 
               {/* Visual Page Grid */}
               {pages.length > 0 && splitMode === 'visual' && (
-                <div className="space-y-3">
-                  <div className="text-xs font-semibold text-slate-500">
-                    Click pages to include in the split ({pages.filter(p => p.selected).length} selected)
+                <div className="space-y-3 text-left">
+                  <div className="text-xs font-bold text-slate-600 dark:text-slate-400 flex justify-between">
+                    <span>Click pages to include in the output ({pages.filter(p => p.selected).length} selected)</span>
+                    <span>Unselected pages will be removed</span>
                   </div>
-                  <PageGridSelector pages={pages} onPageToggle={handlePageToggle} />
+                  <PageGridSelector 
+                    pages={pages} 
+                    onPageToggle={handlePageToggle} 
+                    onPageDelete={handlePageDelete}
+                  />
                 </div>
               )}
 
               <button
                 onClick={handleSplit}
-                className="w-full py-4 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-base shadow-lg shadow-indigo-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-base shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2"
               >
                 <Scissors className="w-5 h-5" />
-                <span>Split PDF Document</span>
+                <span>
+                  {splitMode === 'visual'
+                    ? `Save PDF with ${pages.filter(p => p.selected).length} Selected Pages`
+                    : 'Split PDF Document'}
+                </span>
               </button>
             </div>
           )}

@@ -1,4 +1,4 @@
-# ⚡ DocuVortix — Universal Client-Side PDF Intelligence Suite
+# ⚡ Avatar PDF — Universal Client-Side PDF Intelligence Suite
 
 <div align="center">
 
@@ -94,7 +94,7 @@
 │                   User's Web Browser                   │
 │                                                        │
 │  ┌──────────────────────────────────────────────────┐  │
-│  │               DocuVortix UI (React)              │  │
+│  │               Avatar PDF UI (React)              │  │
 │  └─────────────────────────┬────────────────────────┘  │
 │                            │ (In-Memory Processing)    │
 │  ┌─────────────────────────▼────────────────────────┐  │
@@ -152,7 +152,7 @@ npm run preview
 
 ## 🌐 Deployment
 
-DocuVortix is a 100% static Single Page Application and can be deployed in 1 click to:
+Avatar PDF is a 100% static Single Page Application and can be deployed in 1 click to:
 
 ### Vercel
 ```bash

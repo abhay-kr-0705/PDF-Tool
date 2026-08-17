@@ -1,5 +1,6 @@
 import React from 'react';
 import { TOOLS, CATEGORIES } from '../../data/toolsData';
+import { BrandLogo } from '../common/BrandLogo';
 import { ShieldCheck, Sparkles, Heart, Globe, Lock, Cpu, ArrowUpRight } from 'lucide-react';
 
 interface FooterProps {
@@ -55,16 +56,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           
           {/* Col 1: Brand & Bio */}
           <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-500/30">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-heading font-extrabold text-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">
-                DocuVortix
-              </span>
-            </div>
+            <button 
+              onClick={() => onNavigate('/')}
+              className="text-left focus:outline-none group"
+              aria-label="Avatar PDF Home"
+            >
+              <BrandLogo size="lg" />
+            </button>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
-              The universal client-side PDF intelligence suite. Empowering millions with private, instant, and high-fidelity document manipulation directly in the browser.
+              The universal client-side PDF intelligence suite. Empowering millions with private, instant, and high-fidelity document manipulation directly in the browser at avatarpdf.com.
             </p>
             <div className="flex items-center gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold text-slate-700 dark:text-slate-300">
@@ -161,7 +161,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           <div className="text-slate-500 dark:text-slate-400">
-            © {new Date().getFullYear()} DocuVortix Studio. 100% Client-Side Privacy. All rights reserved.
+            © {new Date().getFullYear()} Avatar PDF Studio. 100% Client-Side Privacy. All rights reserved.
           </div>
         </div>
       </div>

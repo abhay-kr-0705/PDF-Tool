@@ -28,8 +28,8 @@ export async function compressPdf(
       doc.setAuthor('');
       doc.setSubject('');
       doc.setKeywords([]);
-      doc.setProducer('DocuVortix Optimizer');
-      doc.setCreator('DocuVortix Engine');
+      doc.setProducer('Avatar PDF Optimizer');
+      doc.setCreator('Avatar PDF Engine');
     }
 
     if (settings.flattenForms) {

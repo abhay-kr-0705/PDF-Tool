@@ -17,21 +17,21 @@ export const TermsPage: React.FC = () => {
         <div className="space-y-2">
           <h2 className="font-bold text-lg text-slate-900 dark:text-white">1. Agreement to Terms</h2>
           <p>
-            By accessing and using DocuVortix, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, please discontinue using the service.
+            By accessing and using Avatar PDF (avatarpdf.com), you agree to be bound by these Terms of Service. If you disagree with any part of these terms, please discontinue using the service.
           </p>
         </div>
 
         <div className="space-y-2">
           <h2 className="font-bold text-lg text-slate-900 dark:text-white">2. Permitted Use</h2>
           <p>
-            DocuVortix is provided for lawful personal, educational, and commercial document manipulation purposes. You retain 100% intellectual property ownership of all files processed through our platform.
+            Avatar PDF is provided for lawful personal, educational, and commercial document manipulation purposes. You retain 100% intellectual property ownership of all files processed through our platform.
           </p>
         </div>
 
         <div className="space-y-2">
           <h2 className="font-bold text-lg text-slate-900 dark:text-white">3. Disclaimer of Warranties</h2>
           <p>
-            DocuVortix is provided &ldquo;as is&rdquo; without warranties of any kind. While we rigorously test document fidelity across thousands of PDF varieties, you are advised to inspect generated files for accuracy.
+            Avatar PDF is provided &ldquo;as is&rdquo; without warranties of any kind. While we rigorously test document fidelity across thousands of PDF varieties, you are advised to inspect generated files for accuracy.
           </p>
         </div>
 

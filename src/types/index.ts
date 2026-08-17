@@ -21,7 +21,7 @@ export interface ToolDefinition {
   icon: string;
   color: string;
   bgGradient: string;
-  acceptedFiles: string; // e.g. '.pdf', '.docx,.doc', '.xlsx,.xls', '.png,.jpg,.jpeg', '*'
+  acceptedFiles: string;
   allowMultiple: boolean;
   howToSteps: { step: number; title: string; desc: string }[];
   features: { title: string; desc: string }[];
@@ -40,6 +40,12 @@ export interface UploadedFile {
   arrayBuffer?: ArrayBuffer;
   status: 'idle' | 'processing' | 'done' | 'error';
   error?: string;
+  pages?: {
+    pageNumber: number;
+    thumbnailUrl: string;
+    selected: boolean;
+    rotation: number;
+  }[];
 }
 
 export interface PdfPagePreview {
@@ -49,6 +55,10 @@ export interface PdfPagePreview {
   selected: boolean;
   width: number;
   height: number;
+  sourceFileId?: string;
+  sourcePageIndex?: number;
+  isImage?: boolean;
+  imageData?: string;
 }
 
 export type CompressionLevel = 'lossless' | 'balanced' | 'extreme' | 'scanned';
@@ -138,4 +148,31 @@ export interface OcrPageResult {
   words: OcrWord[];
   imageWidth: number;
   imageHeight: number;
+}
+
+export interface NUpSettings {
+  pagesPerSheet: 2 | 4 | 6 | 8 | 9 | 16;
+  paperSize: 'A4' | 'A1' | 'A2' | 'A3' | 'A5' | 'Letter' | 'Legal' | 'Tabloid';
+  orientation: 'portrait' | 'landscape';
+  margin: number; // in pt
+  padding: number; // in pt
+  drawBorders: boolean;
+  addPageNumbers: boolean;
+  fitMode: 'contain' | 'cover';
+}
+
+export interface CleanBgWatermarkSettings {
+  mode: 'clean-bg' | 'invert' | 'erase-watermark';
+  bgThreshold: number; // 0 - 255
+  contrast: number; // 0.5 - 2.5
+  brightness: number; // -100 to 100
+  eraseRegions: {
+    id: string;
+    pageNumber: number;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    color: string;
+  }[];
 }

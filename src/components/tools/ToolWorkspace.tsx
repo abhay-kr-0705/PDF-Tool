@@ -8,6 +8,8 @@ import { CanvasEditorTool } from './CanvasEditorTool';
 import { WatermarkTool } from './WatermarkTool';
 import { ProtectUnlockTool } from './ProtectUnlockTool';
 import { PageNumbersTool } from './PageNumbersTool';
+import { NUpMultiPageTool } from './NUpMultiPageTool';
+import { CleanBgWatermarkRemoverTool } from './CleanBgWatermarkRemoverTool';
 import { OrganizeRotateTool } from './OrganizeRotateTool';
 import { GenericConvertTool } from './GenericConvertTool';
 import { ToolSEOContent } from '../seo/ToolSEOContent';
@@ -28,6 +30,12 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({ tool, onNavigate }
         return <MergeTool tool={tool} />;
       case 'split-pdf':
         return <SplitTool tool={tool} />;
+      case 'n-up-pdf':
+        return <NUpMultiPageTool tool={tool} />;
+      case 'remove-watermark-pdf':
+      case 'clean-bg':
+      case 'invert-pdf':
+        return <CleanBgWatermarkRemoverTool tool={tool} />;
       case 'edit-scanned-pdf':
         return <ScannedOcrTool tool={tool} />;
       case 'edit-pdf':
@@ -45,10 +53,8 @@ export const ToolWorkspace: React.FC<ToolWorkspaceProps> = ({ tool, onNavigate }
       case 'organize-pdf':
       case 'delete-pages':
       case 'extract-pages':
-      case 'n-up-pdf':
       case 'resize-pdf':
       case 'grayscale-pdf':
-      case 'invert-pdf':
       case 'flatten-pdf':
       case 'crop-pdf':
       case 'pdf-metadata':

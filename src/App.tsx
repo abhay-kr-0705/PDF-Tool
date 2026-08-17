@@ -20,7 +20,7 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('docuvortix_theme');
+      const saved = localStorage.getItem('avatarpdf_theme') || localStorage.getItem('docuvortix_theme');
       if (saved) return saved === 'dark';
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
@@ -31,10 +31,10 @@ export function App() {
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('docuvortix_theme', 'dark');
+      localStorage.setItem('avatarpdf_theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('docuvortix_theme', 'light');
+      localStorage.setItem('avatarpdf_theme', 'light');
     }
   }, [isDarkMode]);
 
@@ -55,19 +55,19 @@ export function App() {
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', activeTool.metaDesc);
     } else if (currentPath === 'about') {
-      document.title = 'About DocuVortix — 100% In-Browser PDF Intelligence';
+      document.title = 'About Avatar PDF — 100% In-Browser PDF Intelligence';
     } else if (currentPath === 'privacy') {
-      document.title = 'Privacy Policy — Zero Server Retention Guarantee | DocuVortix';
+      document.title = 'Privacy Policy — Zero Server Retention Guarantee | Avatar PDF';
     } else if (currentPath === 'terms') {
-      document.title = 'Terms of Service | DocuVortix';
+      document.title = 'Terms of Service | Avatar PDF';
     } else if (currentPath === 'faq') {
-      document.title = 'PDF Help & FAQ Knowledge Hub | DocuVortix';
+      document.title = 'PDF Help & FAQ Knowledge Hub | Avatar PDF';
     } else if (currentPath === 'contact') {
-      document.title = 'Contact Support & Feedback | DocuVortix';
+      document.title = 'Contact Support & Feedback | Avatar PDF';
     } else if (currentPath === 'sitemap') {
-      document.title = 'Complete HTML Sitemap of 40+ PDF Tools | DocuVortix';
+      document.title = 'Complete HTML Sitemap of 40+ PDF Tools | Avatar PDF';
     } else {
-      document.title = 'DocuVortix — Universal Client-Side PDF Intelligence Suite';
+      document.title = 'Avatar PDF — Universal Client-Side PDF Intelligence Suite';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', '100% Free & Private Online PDF Tools. Compress, Merge, Split, Convert (Word, Excel, PPT, Image, HTML), Edit Scanned PDFs with OCR, Sign, and Protect directly in your browser.');
     }

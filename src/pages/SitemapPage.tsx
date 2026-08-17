@@ -15,7 +15,7 @@ export const SitemapPage: React.FC<SitemapPageProps> = ({ onNavigate }) => {
           <Map className="w-4 h-4" /> HTML Site Directory
         </div>
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-          DocuVortix Sitemap &amp; Tool Index
+          Avatar PDF Sitemap &amp; Tool Index
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
           Complete indexed listing of all 40+ specialized PDF intelligence tools and legal documentation.

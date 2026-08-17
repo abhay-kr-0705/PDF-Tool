@@ -23,7 +23,7 @@ export const PrivacyPage: React.FC = () => {
             1. Zero Document Collection &amp; Server Transmission
           </h2>
           <p>
-            DocuVortix operates entirely on client-side technology (WebAssembly and Web Workers). When you upload, merge, split, compress, convert, sign, or edit a document on this website:
+            Avatar PDF operates entirely on client-side technology (WebAssembly and Web Workers). When you upload, merge, split, compress, convert, sign, or edit a document on this website:
           </p>
           <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
             <li><strong>Your documents never leave your device:</strong> No file contents, text, images, or metadata are ever transmitted over the network to any server.</li>
@@ -37,7 +37,7 @@ export const PrivacyPage: React.FC = () => {
             2. GDPR, CCPA &amp; HIPAA Compliance
           </h2>
           <p>
-            Because personal data never enters our custody or servers, DocuVortix inherently meets the highest standards of data privacy compliance. Healthcare providers, law firms, and financial organizations can safely use DocuVortix without breaching confidentiality regulations.
+            Because personal data never enters our custody or servers, Avatar PDF inherently meets the highest standards of data privacy compliance. Healthcare providers, law firms, and financial organizations can safely use Avatar PDF without breaching confidentiality regulations.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export const PrivacyPage: React.FC = () => {
             4. Contact Our Data Protection Team
           </h2>
           <p>
-            If you have questions about our zero-retention architecture, contact us at <code>privacy@docuvortix.app</code>.
+            If you have questions about our zero-retention architecture, contact us at <code>privacy@avatarpdf.com</code>.
           </p>
         </div>
       </div>

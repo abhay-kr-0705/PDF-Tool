@@ -43,11 +43,11 @@ export const GenericConvertTool: React.FC<GenericConvertToolProps> = ({ tool }) 
   const isInputTextTool = ['text-to-pdf', 'markdown-to-pdf', 'code-to-pdf', 'html-to-pdf'].includes(tool.id);
   const [inputText, setInputText] = useState(
     tool.id === 'markdown-to-pdf'
-      ? '# DocuVortix PDF Studio\n\nWelcome to the **Markdown to PDF** converter.\n\n- 100% Client-Side\n- Instant Rendering\n- GFM Tables & Code\n\n```javascript\nconsole.log("Hello PDF!");\n```\n'
+      ? '# Avatar PDF Studio\n\nWelcome to the **Markdown to PDF** converter on avatarpdf.com.\n\n- 100% Client-Side\n- Instant Rendering\n- GFM Tables & Code\n\n```javascript\nconsole.log("Hello Avatar PDF!");\n```\n'
       : tool.id === 'code-to-pdf'
       ? '// Enter or paste your source code here\nfunction calculateFactorial(n) {\n  if (n <= 1) return 1;\n  return n * calculateFactorial(n - 1);\n}\n'
       : tool.id === 'html-to-pdf'
-      ? '<div style="padding: 20px; font-family: sans-serif;">\n  <h1 style="color: #4f46e5;">DocuVortix HTML to PDF</h1>\n  <p>Render any HTML snippet or styled template directly to PDF.</p>\n</div>'
+      ? '<div style="padding: 20px; font-family: sans-serif;">\n  <h1 style="color: #4f46e5;">Avatar PDF HTML to PDF</h1>\n  <p>Render any HTML snippet or styled template directly to PDF with avatarpdf.com.</p>\n</div>'
       : 'Type or paste plain text here to convert into a clean PDF document...'
   );
 

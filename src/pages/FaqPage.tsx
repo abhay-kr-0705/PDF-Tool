@@ -12,11 +12,11 @@ const GLOBAL_FAQS = [
   },
   {
     q: 'How do I edit text on a scanned PDF document?',
-    a: 'Upload your scan into our Edit Scanned PDF (OCR) tool. DocuVortix runs Tesseract OCR directly inside your browser to recognize characters, generate a searchable text layer, and let you fix typos or copy raw text directly.'
+    a: 'Upload your scan into our Edit Scanned PDF (OCR) tool. Avatar PDF runs Tesseract OCR directly inside your browser to recognize characters, generate a searchable text layer, and let you fix typos or copy raw text directly.'
   },
   {
     q: 'Are my confidential files uploaded to any servers?',
-    a: 'Never! DocuVortix operates 100% in your browser using client-side WebAssembly and JavaScript engines. No files or personal data are ever transmitted to any remote servers.'
+    a: 'Never! Avatar PDF operates 100% in your browser using client-side WebAssembly and JavaScript engines. No files or personal data are ever transmitted to any remote servers.'
   },
   {
     q: 'Can I convert Word DOCX, Excel XLSX, and PowerPoint PPTX to PDF for free?',

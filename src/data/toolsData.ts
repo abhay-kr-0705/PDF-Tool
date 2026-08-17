@@ -7,7 +7,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'word-to-pdf',
     name: 'Word to PDF',
     shortDesc: 'Convert DOCX and DOC documents to polished, standard PDF files instantly.',
-    metaTitle: 'Word to PDF Converter — Free, Fast & 100% Private Online | DocuVortix',
+    metaTitle: 'Word to PDF Converter — Free, Fast & 100% Private Online | Avatar PDF',
     metaDesc: 'Convert Microsoft Word DOCX and DOC documents to PDF online for free. Preserves all tables, formatting, and fonts with 100% client-side security.',
     keywords: ['word to pdf', 'convert docx to pdf', 'doc to pdf online', 'free word to pdf converter', 'private doc to pdf'],
     category: 'convert-to',
@@ -19,7 +19,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Upload Word File', desc: 'Select or drag & drop your .docx or .doc file into the upload zone.' },
-      { step: 2, title: 'Instant Conversion', desc: 'DocuVortix parses document tables, styles, and headers client-side in seconds.' },
+      { step: 2, title: 'Instant Conversion', desc: 'Avatar PDF parses document tables, styles, and headers client-side in seconds.' },
       { step: 3, title: 'Download PDF', desc: 'Preview your converted document and click Download to save your PDF.' }
     ],
     features: [
@@ -28,8 +28,8 @@ export const TOOLS: ToolDefinition[] = [
       { title: 'No File Size Limits', desc: 'Unlimited conversions with instant WebAssembly speed.' }
     ],
     faqs: [
-      { q: 'Will my Word formatting be preserved when converting to PDF?', a: 'Yes! DocuVortix extracts styles, paragraphs, tables, and typography to reproduce an identical PDF representation.' },
-      { q: 'Is it safe to convert confidential Word files here?', a: 'Completely safe. Unlike other tools that upload your files to external cloud servers, DocuVortix runs 100% locally in your web browser.' },
+      { q: 'Will my Word formatting be preserved when converting to PDF?', a: 'Yes! Avatar PDF extracts styles, paragraphs, tables, and typography to reproduce an identical PDF representation.' },
+      { q: 'Is it safe to convert confidential Word files here?', a: 'Completely safe. Unlike other tools that upload your files to external cloud servers, Avatar PDF runs 100% locally in your web browser.' },
       { q: 'Do I need Microsoft Word installed?', a: 'No! No external software or MS Office license is required.' }
     ],
     relatedToolSlugs: ['pdf-to-word', 'excel-to-pdf', 'powerpoint-to-pdf', 'merge-pdf']
@@ -41,7 +41,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-to-word',
     name: 'PDF to Word',
     shortDesc: 'Convert PDF documents into fully editable Microsoft Word (.docx) files.',
-    metaTitle: 'PDF to Word Converter (.DOCX) — Free & Accurate Online | DocuVortix',
+    metaTitle: 'PDF to Word Converter (.DOCX) — Free & Accurate Online | Avatar PDF',
     metaDesc: 'Convert PDF files to editable DOCX Word documents online. Extract text, tables, and formatting with zero file upload privacy.',
     keywords: ['pdf to word', 'convert pdf to docx', 'pdf to doc converter free', 'editable word from pdf'],
     category: 'convert-from',
@@ -74,7 +74,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'compress-pdf',
     name: 'Compress PDF',
     shortDesc: 'Shrink PDF file size while maintaining maximum quality with smart compression.',
-    metaTitle: 'Compress PDF Online — Reduce PDF Size Without Losing Quality | DocuVortix',
+    metaTitle: 'Compress PDF Online — Reduce PDF Size Without Losing Quality | Avatar PDF',
     metaDesc: 'Compress PDF files online for free. Choose lossless compression, balanced quality, or extreme reduction with live file size savings.',
     keywords: ['compress pdf', 'reduce pdf size', 'compress pdf without losing quality', 'shrink pdf online', 'lossless pdf compression'],
     category: 'optimize',
@@ -107,7 +107,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'merge-pdf',
     name: 'Merge PDF',
     shortDesc: 'Combine multiple PDF files into a single organized document in your custom order.',
-    metaTitle: 'Merge PDF Online — Combine Multiple PDFs into One Document | DocuVortix',
+    metaTitle: 'Merge PDF Online — Combine Multiple PDFs into One Document | Avatar PDF',
     metaDesc: 'Merge PDF files online for free. Combine multiple PDFs with visual drag-and-drop reordering. Fast, secure, and private.',
     keywords: ['merge pdf', 'combine pdfs', 'join pdf files', 'merge pdf online free', 'reorder and merge pdf'],
     category: 'organize',
@@ -129,7 +129,7 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       { q: 'Can I merge password-protected PDFs?', a: 'Unlock the PDF using our Unlock PDF tool first, then combine it with your other documents.' },
-      { q: 'Is there a limit on how many PDFs I can merge?', a: 'No limit! Because DocuVortix runs on your device, you can merge as many documents as your browser memory permits.' }
+      { q: 'Is there a limit on how many PDFs I can merge?', a: 'No limit! Because Avatar PDF runs on your device, you can merge as many documents as your browser memory permits.' }
     ],
     relatedToolSlugs: ['split-pdf', 'organize-pdf', 'compress-pdf', 'extract-pages']
   },
@@ -140,7 +140,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'split-pdf',
     name: 'Split PDF',
     shortDesc: 'Separate PDF pages into individual documents or extract custom page ranges.',
-    metaTitle: 'Split PDF Online — Extract Pages & Separate PDF Ranges | DocuVortix',
+    metaTitle: 'Split PDF Online — Extract Pages & Separate PDF Ranges | Avatar PDF',
     metaDesc: 'Split PDF files online for free. Extract specific page ranges (e.g. 1-5, 8, 11-15) or split every page into separate files with 1-click download.',
     keywords: ['split pdf', 'extract pdf pages', 'separate pdf', 'split pdf by page range', 'cut pdf'],
     category: 'organize',
@@ -172,7 +172,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'edit-scanned-pdf',
     name: 'Edit Scanned PDF (OCR)',
     shortDesc: 'Recognize scanned document text with Tesseract OCR, copy, edit, and overlay live text.',
-    metaTitle: 'Edit Scanned PDF Online with OCR — Searchable & Editable Text | DocuVortix',
+    metaTitle: 'Edit Scanned PDF Online with OCR — Searchable & Editable Text | Avatar PDF',
     metaDesc: 'Edit scanned PDF documents online. Powered by client-side Tesseract OCR to recognize text, detect bounding boxes, make text searchable, and edit scanned text directly.',
     keywords: ['edit scanned pdf', 'ocr pdf online', 'scanned pdf to text', 'make pdf searchable', 'tesseract ocr pdf'],
     category: 'edit-scan',
@@ -194,7 +194,7 @@ export const TOOLS: ToolDefinition[] = [
     ],
     faqs: [
       { q: 'What is OCR for scanned PDFs?', a: 'OCR (Optical Character Recognition) analyzes scanned document images, recognizes letterforms, and converts them into editable, selectable text.' },
-      { q: 'Does DocuVortix upload my scanned document to any cloud server?', a: 'No! The entire OCR engine runs directly inside your browser via WebAssembly, guaranteeing total confidentiality for medical, financial, and legal scans.' }
+      { q: 'Does Avatar PDF upload my scanned document to any cloud server?', a: 'No! The entire OCR engine runs directly inside your browser via WebAssembly, guaranteeing total confidentiality for medical, financial, and legal scans.' }
     ],
     relatedToolSlugs: ['edit-pdf', 'pdf-to-text', 'deskew-pdf', 'sign-pdf']
   },
@@ -205,7 +205,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'edit-pdf',
     name: 'Edit PDF',
     shortDesc: 'Add text, freehand drawings, shapes, highlights, stamps, and redact sensitive info.',
-    metaTitle: 'Free Online PDF Editor — Add Text, Annotate, Redact & Draw | DocuVortix',
+    metaTitle: 'Free Online PDF Editor — Add Text, Annotate, Redact & Draw | Avatar PDF',
     metaDesc: 'Edit PDF files online for free. Add custom text, highlight paragraphs, draw shapes, apply stamps, redact sensitive information, and sign documents.',
     keywords: ['edit pdf', 'free online pdf editor', 'annotate pdf', 'add text to pdf', 'pdf markup tool'],
     category: 'edit-scan',
@@ -237,7 +237,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'excel-to-pdf',
     name: 'Excel to PDF',
     shortDesc: 'Convert XLSX, XLS, and CSV spreadsheets into formatted, professional PDF tables.',
-    metaTitle: 'Excel to PDF Converter (.XLSX, .CSV) — Free & Private Online | DocuVortix',
+    metaTitle: 'Excel to PDF Converter (.XLSX, .CSV) — Free & Private Online | Avatar PDF',
     metaDesc: 'Convert Excel spreadsheets (XLSX, XLS, CSV) to clean PDF tables online. Fast in-browser conversion with multi-sheet support.',
     keywords: ['excel to pdf', 'convert xlsx to pdf', 'csv to pdf', 'spreadsheet to pdf converter'],
     category: 'convert-to',
@@ -249,7 +249,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Select Spreadsheet', desc: 'Upload your .xlsx, .xls, or .csv file.' },
-      { step: 2, title: 'Grid Rendering', desc: 'DocuVortix parses tabular columns, sheet headers, and data cells.' },
+      { step: 2, title: 'Grid Rendering', desc: 'Avatar PDF parses tabular columns, sheet headers, and data cells.' },
       { step: 3, title: 'Download PDF', desc: 'Get your publication-ready landscape table PDF.' }
     ],
     features: [
@@ -268,7 +268,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-to-excel',
     name: 'PDF to Excel',
     shortDesc: 'Extract structured tables, numbers, and data columns from PDF into .XLSX.',
-    metaTitle: 'PDF to Excel Converter (.XLSX) — Extract Tables Online Free | DocuVortix',
+    metaTitle: 'PDF to Excel Converter (.XLSX) — Extract Tables Online Free | Avatar PDF',
     metaDesc: 'Convert PDF tables into editable Excel XLSX spreadsheets online. Automatically detect columns, rows, and numbers with zero server uploads.',
     keywords: ['pdf to excel', 'convert pdf to xlsx', 'extract table from pdf', 'pdf to spreadsheet free'],
     category: 'convert-from',
@@ -299,7 +299,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'powerpoint-to-pdf',
     name: 'PowerPoint to PDF',
     shortDesc: 'Convert PPTX presentation slides into high-fidelity PDF slide decks.',
-    metaTitle: 'PowerPoint to PDF Converter (.PPTX) — Free Online | DocuVortix',
+    metaTitle: 'PowerPoint to PDF Converter (.PPTX) — Free Online | Avatar PDF',
     metaDesc: 'Convert Microsoft PowerPoint presentations (PPTX, PPT) to PDF online. Perfect for pitch decks, handouts, and presentation sharing.',
     keywords: ['powerpoint to pdf', 'convert pptx to pdf', 'ppt to pdf online', 'slide deck to pdf'],
     category: 'convert-to',
@@ -311,7 +311,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Upload Presentation', desc: 'Select your .pptx or .ppt slide deck.' },
-      { step: 2, title: 'Slide Layout Rendering', desc: 'DocuVortix converts slides into crisp landscape pages.' },
+      { step: 2, title: 'Slide Layout Rendering', desc: 'Avatar PDF converts slides into crisp landscape pages.' },
       { step: 3, title: 'Download PDF', desc: 'Save your presentation PDF ready for distribution.' }
     ],
     features: [
@@ -319,7 +319,7 @@ export const TOOLS: ToolDefinition[] = [
       { title: 'Compact File Size', desc: 'Optimized for quick email attachments.' }
     ],
     faqs: [
-      { q: 'Does this work on mobile?', a: 'Yes! DocuVortix works on all desktop and mobile browsers.' }
+      { q: 'Does this work on mobile?', a: 'Yes! Avatar PDF works on all desktop and mobile browsers.' }
     ],
     relatedToolSlugs: ['pdf-to-powerpoint', 'word-to-pdf', 'excel-to-pdf']
   },
@@ -330,7 +330,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-to-powerpoint',
     name: 'PDF to PowerPoint',
     shortDesc: 'Convert PDF document pages into editable Microsoft PowerPoint (.pptx) slides.',
-    metaTitle: 'PDF to PowerPoint Converter (.PPTX) — Free Online | DocuVortix',
+    metaTitle: 'PDF to PowerPoint Converter (.PPTX) — Free Online | Avatar PDF',
     metaDesc: 'Convert PDF pages to PowerPoint PPTX presentations online. High-res slide layout preservation for presentations and pitches.',
     keywords: ['pdf to powerpoint', 'convert pdf to pptx', 'pdf to slides', 'pdf presentation converter'],
     category: 'convert-from',
@@ -360,7 +360,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-to-image',
     name: 'PDF to Image',
     shortDesc: 'Convert PDF pages into high-resolution JPG, PNG, or WEBP images with ZIP download.',
-    metaTitle: 'PDF to Image Converter (JPG, PNG, WEBP) — High Resolution | DocuVortix',
+    metaTitle: 'PDF to Image Converter (JPG, PNG, WEBP) — High Resolution | Avatar PDF',
     metaDesc: 'Convert PDF pages to high-resolution PNG, JPG, or WEBP images online. Choose 150 or 300 DPI and download all pages in a single ZIP.',
     keywords: ['pdf to image', 'pdf to jpg', 'pdf to png', 'convert pdf to image online', 'high res pdf to picture'],
     category: 'convert-from',
@@ -392,7 +392,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'image-to-pdf',
     name: 'Image to PDF',
     shortDesc: 'Convert JPG, PNG, WEBP, SVG, TIFF, and BMP images into a unified PDF document.',
-    metaTitle: 'Image to PDF Converter (JPG, PNG, WEBP to PDF) — Free Online | DocuVortix',
+    metaTitle: 'Image to PDF Converter (JPG, PNG, WEBP to PDF) — Free Online | Avatar PDF',
     metaDesc: 'Convert images to PDF online for free. Combine multiple JPG, PNG, WEBP, or SVG photos into a single PDF with custom page size and margin controls.',
     keywords: ['image to pdf', 'jpg to pdf', 'png to pdf', 'convert photos to pdf', 'combine images into pdf'],
     category: 'convert-to',
@@ -424,7 +424,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-to-html',
     name: 'PDF to HTML',
     shortDesc: 'Convert PDF pages into responsive HTML5 web pages with styled text layers.',
-    metaTitle: 'PDF to HTML Converter — Clean HTML5 & CSS Online | DocuVortix',
+    metaTitle: 'PDF to HTML Converter — Clean HTML5 & CSS Online | Avatar PDF',
     metaDesc: 'Convert PDF to clean, responsive HTML5 code online. Retain text positioning, font sizes, and layout for web embedding.',
     keywords: ['pdf to html', 'convert pdf to webpage', 'pdf to html5 converter free', 'embed pdf as html'],
     category: 'convert-from',
@@ -436,7 +436,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Upload PDF', desc: 'Select your PDF document.' },
-      { step: 2, title: 'HTML Generation', desc: 'DocuVortix converts text streams and layout coordinates to CSS absolute positioning.' },
+      { step: 2, title: 'HTML Generation', desc: 'Avatar PDF converts text streams and layout coordinates to CSS absolute positioning.' },
       { step: 3, title: 'Download HTML', desc: 'Get your standalone HTML file ready for web publishing.' }
     ],
     features: [
@@ -454,7 +454,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'html-to-pdf',
     name: 'HTML to PDF',
     shortDesc: 'Convert raw HTML code, rich formatted text, or styled snippets to PDF.',
-    metaTitle: 'HTML to PDF Converter — Convert HTML Code & Web Content | DocuVortix',
+    metaTitle: 'HTML to PDF Converter — Convert HTML Code & Web Content | Avatar PDF',
     metaDesc: 'Convert HTML code and rich web snippets to PDF online for free. Clean CSS rendering and pagination.',
     keywords: ['html to pdf', 'convert html to pdf online', 'webpage to pdf', 'html code to pdf'],
     category: 'convert-to',
@@ -484,7 +484,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'watermark-pdf',
     name: 'Watermark PDF',
     shortDesc: 'Add custom text or image watermarks with angle, opacity, and repeating grid styles.',
-    metaTitle: 'Watermark PDF Online — Add Text & Image Watermarks | DocuVortix',
+    metaTitle: 'Watermark PDF Online — Add Text & Image Watermarks | Avatar PDF',
     metaDesc: 'Add custom text or logo watermarks to PDF files online for free. Customize font size, rotation angle, opacity, and tiled repeating grids.',
     keywords: ['watermark pdf', 'add watermark to pdf', 'pdf watermark online', 'stamp confidential watermark on pdf'],
     category: 'security',
@@ -505,7 +505,7 @@ export const TOOLS: ToolDefinition[] = [
       { title: 'Opacity & Rotation Controls', desc: 'Fine-tune subtle transparency and 45° angle.' }
     ],
     faqs: [
-      { q: 'Can the watermark be easily removed by others?', a: 'DocuVortix merges the watermark directly into the PDF content stream, making it non-trivial to remove.' }
+      { q: 'Can the watermark be easily removed by others?', a: 'Avatar PDF merges the watermark directly into the PDF content stream, making it non-trivial to remove.' }
     ],
     relatedToolSlugs: ['protect-pdf', 'sign-pdf', 'page-numbers']
   },
@@ -516,7 +516,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'protect-pdf',
     name: 'Protect PDF',
     shortDesc: 'Encrypt your PDF with a strong user password and restrict unauthorized modifications.',
-    metaTitle: 'Protect PDF Online — Add Password Encryption to PDF | DocuVortix',
+    metaTitle: 'Protect PDF Online — Add Password Encryption to PDF | Avatar PDF',
     metaDesc: 'Protect PDF files with password encryption online for free. Secure sensitive financial and legal documents directly in your browser.',
     keywords: ['protect pdf', 'password protect pdf', 'encrypt pdf online', 'lock pdf with password'],
     category: 'security',
@@ -536,7 +536,7 @@ export const TOOLS: ToolDefinition[] = [
       { title: 'Zero Server Knowledge', desc: 'Passwords are never sent to any server.' }
     ],
     faqs: [
-      { q: 'What happens if I forget my password?', a: 'Because DocuVortix operates with zero-knowledge client privacy, we do not store passwords. Make sure to record your password safely.' }
+      { q: 'What happens if I forget my password?', a: 'Because Avatar PDF operates with zero-knowledge client privacy, we do not store passwords. Make sure to record your password safely.' }
     ],
     relatedToolSlugs: ['unlock-pdf', 'watermark-pdf', 'redact-pdf']
   },
@@ -547,7 +547,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'unlock-pdf',
     name: 'Unlock PDF',
     shortDesc: 'Remove password security and permission restrictions from unlocked PDF documents.',
-    metaTitle: 'Unlock PDF Online — Remove PDF Password & Restrictions | DocuVortix',
+    metaTitle: 'Unlock PDF Online — Remove PDF Password & Restrictions | Avatar PDF',
     metaDesc: 'Unlock password protected PDF files online for free. Remove copy, print, and edit restrictions easily.',
     keywords: ['unlock pdf', 'remove pdf password', 'decrypt pdf online free', 'remove pdf restrictions'],
     category: 'security',
@@ -577,7 +577,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'page-numbers',
     name: 'Add Page Numbers',
     shortDesc: 'Insert customizable page numbers, headers, and footers across all PDF pages.',
-    metaTitle: 'Add Page Numbers to PDF Online — Header & Footer Customizer | DocuVortix',
+    metaTitle: 'Add Page Numbers to PDF Online — Header & Footer Customizer | Avatar PDF',
     metaDesc: 'Add page numbers to PDF documents online for free. Customize position, format (Page N of M), font style, start page, and margins.',
     keywords: ['add page numbers to pdf', 'number pdf pages', 'pdf page numbering online', 'header footer pdf'],
     category: 'organize',
@@ -609,7 +609,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'rotate-pdf',
     name: 'Rotate PDF',
     shortDesc: 'Rotate specific pages or all pages 90°, 180°, or 270° clockwise with visual previews.',
-    metaTitle: 'Rotate PDF Pages Online — 90, 180, 270 Degrees | DocuVortix',
+    metaTitle: 'Rotate PDF Pages Online — 90, 180, 270 Degrees | Avatar PDF',
     metaDesc: 'Rotate PDF pages online for free. Rotate individual pages or all pages permanently. Interactive live page thumbnail rotation.',
     keywords: ['rotate pdf', 'turn pdf pages', 'rotate pdf 90 degrees', 'fix upside down pdf'],
     category: 'organize',
@@ -640,7 +640,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'organize-pdf',
     name: 'Organize Pages',
     shortDesc: 'Visual drag-and-drop page grid to reorder, duplicate, rotate, and delete pages.',
-    metaTitle: 'Organize PDF Pages Online — Drag & Drop Page Manager | DocuVortix',
+    metaTitle: 'Organize PDF Pages Online — Drag & Drop Page Manager | Avatar PDF',
     metaDesc: 'Organize PDF pages online for free. Visual drag-and-drop grid to rearrange, duplicate, delete, and rotate PDF pages effortlessly.',
     keywords: ['organize pdf pages', 'reorder pdf pages', 'rearrange pdf pages', 'pdf page organizer'],
     category: 'organize',
@@ -671,7 +671,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'delete-pages',
     name: 'Delete PDF Pages',
     shortDesc: 'Select and remove unwanted pages from your PDF with 1-click visual removal.',
-    metaTitle: 'Delete PDF Pages Online — Remove Unwanted Pages Free | DocuVortix',
+    metaTitle: 'Delete PDF Pages Online — Remove Unwanted Pages Free | Avatar PDF',
     metaDesc: 'Delete pages from PDF online for free. Click thumbnails to remove unwanted blank or duplicate pages and download your clean PDF.',
     keywords: ['delete pdf pages', 'remove pages from pdf', 'cut pages from pdf', 'erase pdf page'],
     category: 'organize',
@@ -701,7 +701,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'extract-pages',
     name: 'Extract PDF Pages',
     shortDesc: 'Select individual pages or custom ranges to create a fresh standalone PDF.',
-    metaTitle: 'Extract PDF Pages Online — Save Selected Pages as New PDF | DocuVortix',
+    metaTitle: 'Extract PDF Pages Online — Save Selected Pages as New PDF | Avatar PDF',
     metaDesc: 'Extract pages from PDF online for free. Select specific pages and save them into a new standalone PDF document.',
     keywords: ['extract pdf pages', 'save specific pdf pages', 'extract pages from pdf free'],
     category: 'organize',
@@ -731,7 +731,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'sign-pdf',
     name: 'Sign PDF',
     shortDesc: 'Draw your signature, type cursive signatures, or upload transparent signature stamps.',
-    metaTitle: 'Sign PDF Online Free — Electronic Signature & Certificate Stamp | DocuVortix',
+    metaTitle: 'Sign PDF Online Free — Electronic Signature & Certificate Stamp | Avatar PDF',
     metaDesc: 'Sign PDF documents online for free. Draw your e-signature, type cursive signatures, or upload signature image stamps with complete privacy.',
     keywords: ['sign pdf', 'e-sign pdf online', 'digital signature pdf', 'draw signature on pdf free'],
     category: 'security',
@@ -763,7 +763,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'redact-pdf',
     name: 'Redact PDF',
     shortDesc: 'Permanently blackout or whiteout sensitive PII, SSNs, and confidential information.',
-    metaTitle: 'Redact PDF Online — Permanently Blackout Sensitive PII | DocuVortix',
+    metaTitle: 'Redact PDF Online — Permanently Blackout Sensitive PII | Avatar PDF',
     metaDesc: 'Redact PDF files online for free. Permanently black out or white out sensitive confidential information and personal data.',
     keywords: ['redact pdf', 'blackout pdf text', 'remove sensitive info from pdf', 'permanent pdf redaction'],
     category: 'security',
@@ -782,7 +782,7 @@ export const TOOLS: ToolDefinition[] = [
       { title: 'Permanent Data Removal', desc: 'Burns black rectangles into the vector layer so text cannot be highlighted underneath.' }
     ],
     faqs: [
-      { q: 'Can someone undo the black redaction box?', a: 'No, DocuVortix writes the redaction as a permanent vector element in the PDF.' }
+      { q: 'Can someone undo the black redaction box?', a: 'No, Avatar PDF writes the redaction as a permanent vector element in the PDF.' }
     ],
     relatedToolSlugs: ['edit-pdf', 'protect-pdf', 'flatten-pdf']
   },
@@ -793,7 +793,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'flatten-pdf',
     name: 'Flatten PDF',
     shortDesc: 'Flatten interactive form fields and annotations into static, uneditable vector layers.',
-    metaTitle: 'Flatten PDF Online — Lock Form Fields & Annotations | DocuVortix',
+    metaTitle: 'Flatten PDF Online — Lock Form Fields & Annotations | Avatar PDF',
     metaDesc: 'Flatten PDF forms and annotations online for free. Make interactive form fields permanent and uneditable.',
     keywords: ['flatten pdf', 'lock pdf form fields', 'flatten annotations pdf', 'make pdf uneditable'],
     category: 'optimize',
@@ -805,7 +805,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Select Form PDF', desc: 'Upload the filled PDF form.' },
-      { step: 2, title: 'Flatten Structure', desc: 'DocuVortix merges AcroForm interactive fields into static page graphics.' },
+      { step: 2, title: 'Flatten Structure', desc: 'Avatar PDF merges AcroForm interactive fields into static page graphics.' },
       { step: 3, title: 'Download Flattened PDF', desc: 'Save your tamper-proof document.' }
     ],
     features: [
@@ -823,7 +823,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'grayscale-pdf',
     name: 'Grayscale PDF',
     shortDesc: 'Convert color PDF documents to clean black & white grayscale for eco-friendly printing.',
-    metaTitle: 'Convert PDF to Grayscale / B&W Online Free | DocuVortix',
+    metaTitle: 'Convert PDF to Grayscale / B&W Online Free | Avatar PDF',
     metaDesc: 'Convert color PDF documents to black and white grayscale online. Save printer ink and toner with eco-friendly B&W PDFs.',
     keywords: ['grayscale pdf', 'convert pdf to black and white', 'b&w pdf converter', 'pdf eco printing'],
     category: 'optimize',
@@ -853,7 +853,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'invert-pdf',
     name: 'Invert PDF (Dark Mode)',
     shortDesc: 'Invert document colors to dark mode (black background, light text) for night reading.',
-    metaTitle: 'Invert PDF Colors Online — PDF Dark Mode Reader | DocuVortix',
+    metaTitle: 'Invert PDF Colors Online — PDF Dark Mode Reader | Avatar PDF',
     metaDesc: 'Invert PDF colors online for free. Turn white pages black for comfortable night reading and eye-strain reduction.',
     keywords: ['invert pdf colors', 'pdf dark mode', 'negative pdf converter', 'night mode pdf'],
     category: 'optimize',
@@ -883,7 +883,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'compare-pdf',
     name: 'Compare PDF',
     shortDesc: 'Side-by-side visual diff slider and text change detection between two PDF revisions.',
-    metaTitle: 'Compare PDF Online — Visual Diff & Text Change Detector | DocuVortix',
+    metaTitle: 'Compare PDF Online — Visual Diff & Text Change Detector | Avatar PDF',
     metaDesc: 'Compare two PDF files online for free. Spot differences, visual changes, and text revisions with an interactive split-slider.',
     keywords: ['compare pdf', 'diff pdf files', 'pdf comparison tool online', 'spot differences in two pdfs'],
     category: 'advanced',
@@ -913,7 +913,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'form-filler',
     name: 'PDF Form Filler',
     shortDesc: 'Detect and fill interactive AcroForm fields (text fields, checkboxes) and export.',
-    metaTitle: 'Fill PDF Forms Online Free — Interactive AcroForm Filler | DocuVortix',
+    metaTitle: 'Fill PDF Forms Online Free — Interactive AcroForm Filler | Avatar PDF',
     metaDesc: 'Fill out PDF forms online for free. Type into text boxes, check checkboxes, and save filled PDF forms securely in your browser.',
     keywords: ['fill pdf form online', 'pdf form filler', 'type on pdf form', 'fill and sign pdf'],
     category: 'advanced',
@@ -943,7 +943,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-metadata',
     name: 'PDF Metadata Editor',
     shortDesc: 'View and update Title, Author, Subject, Keywords, Creator, and Producer properties.',
-    metaTitle: 'Edit PDF Metadata Online — Change Title, Author & Keywords | DocuVortix',
+    metaTitle: 'Edit PDF Metadata Online — Change Title, Author & Keywords | Avatar PDF',
     metaDesc: 'Edit PDF metadata online for free. View and change PDF title, author, subject, keywords, creation date, and creator properties.',
     keywords: ['edit pdf metadata', 'change pdf author', 'modify pdf title', 'pdf metadata editor online'],
     category: 'advanced',
@@ -967,15 +967,15 @@ export const TOOLS: ToolDefinition[] = [
     relatedToolSlugs: ['compress-pdf', 'protect-pdf', 'page-numbers']
   },
 
-  // 32. N-Up / Booklet Imposition
+  // 32. N-Up / Multiple Pages on One Page (A4, A1-A5)
   {
     id: 'n-up-pdf',
     slug: 'n-up-pdf',
-    name: 'N-Up / Booklet Imposition',
-    shortDesc: 'Render 2, 4, 8, or 16 pages per sheet for handouts, study sheets, and booklets.',
-    metaTitle: 'N-Up PDF Online — 2, 4, 8 Pages Per Sheet Booklet Imposition | DocuVortix',
-    metaDesc: 'Combine multiple PDF pages onto a single sheet (2-up, 4-up, 8-up) online for free. Perfect for study handouts and booklet printing.',
-    keywords: ['n-up pdf', 'multiple pages per sheet pdf', '2 up pdf', '4 up pdf', 'booklet imposition'],
+    name: 'Multiple Pages on 1 Page (N-Up)',
+    shortDesc: 'Fit 2, 4, 6, 8, 9, or 16 pages onto A4, A1, A2, A3, A5 with live preview, adjustable margins & padding.',
+    metaTitle: 'Multiple Pages on One Page PDF (A4, A1, A2, A3) — Live Preview & Margins | Avatar PDF',
+    metaDesc: 'Combine multiple PDF pages into one sheet (A4 by default, A1, A2, A3, A5) online. Live visual preview with adjustable margins, padding, and landscape/portrait modes.',
+    keywords: ['multiple pages at one single page pdf', 'multiple pages on one page a4', 'multi page pdf sheet a1 a2 a3', 'n-up pdf', 'booklet imposition', 'fit pages on a4', '2 pages on one sheet', '4 pages on one sheet', 'adjustable margin padding pdf'],
     category: 'organize',
     badge: 'Pro',
     icon: 'Grid',
@@ -985,16 +985,53 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Upload PDF', desc: 'Select your multi-page document.' },
-      { step: 2, title: 'Select Pages Per Sheet', desc: 'Choose 2-Up, 4-Up, 8-Up, or 16-Up grid layout.' },
-      { step: 3, title: 'Download Sheet PDF', desc: 'Save your print-ready handout PDF.' }
+      { step: 2, title: 'Configure Sheet Layout', desc: 'Choose 2, 4, 6, 8, 9, or 16 pages per sheet, select paper size (A4, A1-A5), orientation, and adjust margin/padding sliders with live preview.' },
+      { step: 3, title: 'Download Sheet PDF', desc: 'Get your print-ready handout or booklet sheet.' }
     ],
     features: [
-      { title: 'Save Paper & Ink', desc: 'Fit 2 or 4 slides/pages on a single A4 page.' }
+      { title: 'Live Real-Time Preview', desc: 'Watch the imposed sheet preview update instantly as you change settings.' },
+      { title: 'All ISO Paper Sizes', desc: 'Supports A4 (default), A1, A2, A3, A5, US Letter, Legal, and Tabloid.' },
+      { title: 'Adjustable Margins & Gaps', desc: 'Fine-tune outer margins and gap padding between tiles with sliders.' },
+      { title: 'Portrait & Landscape Modes', desc: '1-click orientation switching with automatic layout recalculation.' }
     ],
     faqs: [
-      { q: 'Is it good for printing lecture slides?', a: 'Yes, 2-up and 4-up are ideal for printing presentations.' }
+      { q: 'Can I put 2 or 4 pages on a single A4 page?', a: 'Yes! Select 2-Up or 4-Up with A4 paper size, and customize the margins and padding.' },
+      { q: 'Can I see how it looks before saving?', a: 'Yes! Our real-time canvas preview shows the exact tile arrangement as you adjust sliders.' }
     ],
-    relatedToolSlugs: ['resize-pdf', 'grayscale-pdf', 'organize-pdf']
+    relatedToolSlugs: ['resize-pdf', 'grayscale-pdf', 'organize-pdf', 'merge-pdf']
+  },
+
+  // 41. Clean Background, Invert & Remove Watermark / Logo
+  {
+    id: 'remove-watermark-pdf',
+    slug: 'remove-watermark-pdf',
+    name: 'Remove Watermark & Clean BG',
+    shortDesc: 'Erase watermarks, remove company logos/stamps, whiten yellowed scan backgrounds, or invert colors.',
+    metaTitle: 'Remove Watermarks & Clean PDF Background Online Free | Avatar PDF',
+    metaDesc: 'Remove watermarks, logos, and stamps from PDF pages online for free. Clean and whiten yellowed/gray scan backgrounds or invert colors directly in your browser.',
+    keywords: ['remove watermark from pdf', 'erase watermark', 'watermark remover', 'remove logo from pdf', 'clean background pdf', 'whiten pdf scan', 'remove stamp from pdf', 'invert pdf color', 'dark mode pdf', 'erase watermark online'],
+    category: 'edit-scan',
+    badge: 'Pro',
+    icon: 'Eraser',
+    color: 'text-rose-500',
+    bgGradient: 'from-rose-500/10 via-pink-500/5 to-transparent',
+    acceptedFiles: '.pdf',
+    allowMultiple: false,
+    howToSteps: [
+      { step: 1, title: 'Upload PDF', desc: 'Select the document with unwanted watermarks, logos, or dark scan backgrounds.' },
+      { step: 2, title: 'Select Cleanup Mode', desc: 'Drag an eraser box over any watermark/logo to erase it, or adjust the background whitening threshold slider.' },
+      { step: 3, title: 'Download Cleaned PDF', desc: 'Save your sanitized, high-contrast, watermark-free document.' }
+    ],
+    features: [
+      { title: 'Interactive Watermark Eraser', desc: 'Draw a box over any existing watermark, header logo, or stamp to erase it cleanly.' },
+      { title: 'Scan Background Whitener', desc: 'Turn gray/yellowed paper background into pure crisp white.' },
+      { title: 'High-Contrast Color Inverter', desc: 'Convert to dark mode night reading.' }
+    ],
+    faqs: [
+      { q: 'Can I erase a company logo or confidential watermark?', a: 'Yes! Select the Erase Logo / Watermark tool and drag an eraser box over the watermark or logo on the page.' },
+      { q: 'Does it work on scanned documents?', a: 'Yes, the background whitener removes gray tints and enhances text contrast on scans.' }
+    ],
+    relatedToolSlugs: ['watermark-pdf', 'edit-scanned-pdf', 'edit-pdf', 'deskew-pdf']
   },
 
   // 33. Extract Images from PDF
@@ -1003,7 +1040,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'extract-images',
     name: 'Extract Images from PDF',
     shortDesc: 'Scan the PDF stream to extract and download all embedded photos and logos in a ZIP.',
-    metaTitle: 'Extract Images from PDF Online Free — Download Embedded Photos | DocuVortix',
+    metaTitle: 'Extract Images from PDF Online Free — Download Embedded Photos | Avatar PDF',
     metaDesc: 'Extract all images and photos from PDF files online for free. Download embedded graphics in high quality as a ZIP archive.',
     keywords: ['extract images from pdf', 'save photos from pdf', 'pdf image ripper online', 'extract embedded graphics from pdf'],
     category: 'convert-from',
@@ -1015,7 +1052,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Upload PDF', desc: 'Select the PDF containing photos or diagrams.' },
-      { step: 2, title: 'Scan Stream Objects', desc: 'DocuVortix scans XObject image streams in the PDF.' },
+      { step: 2, title: 'Scan Stream Objects', desc: 'Avatar PDF scans XObject image streams in the PDF.' },
       { step: 3, title: 'Download Images ZIP', desc: 'Get all extracted photos in original quality.' }
     ],
     features: [
@@ -1033,7 +1070,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'pdf-to-text',
     name: 'PDF to Text',
     shortDesc: 'Extract clean, raw text content from PDF pages with 1-click copy or TXT download.',
-    metaTitle: 'PDF to Text Converter (.TXT) — Extract Plain Text Online | DocuVortix',
+    metaTitle: 'PDF to Text Converter (.TXT) — Extract Plain Text Online | Avatar PDF',
     metaDesc: 'Convert PDF to plain text TXT online for free. Extract raw text with layout preservation and copy to clipboard instantly.',
     keywords: ['pdf to text', 'extract text from pdf', 'pdf to txt online', 'copy text from pdf'],
     category: 'convert-from',
@@ -1045,7 +1082,7 @@ export const TOOLS: ToolDefinition[] = [
     allowMultiple: false,
     howToSteps: [
       { step: 1, title: 'Upload PDF', desc: 'Select your PDF document.' },
-      { step: 2, title: 'Extract Text Layer', desc: 'DocuVortix extracts all text strings.' },
+      { step: 2, title: 'Extract Text Layer', desc: 'Avatar PDF extracts all text strings.' },
       { step: 3, title: 'Copy or Download', desc: 'Copy directly to clipboard or save as .txt file.' }
     ],
     features: [
@@ -1063,7 +1100,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'text-to-pdf',
     name: 'Text to PDF',
     shortDesc: 'Convert plain text notes or .txt files into formatted, styled PDF documents.',
-    metaTitle: 'Text to PDF Converter (.TXT to PDF) — Free Online | DocuVortix',
+    metaTitle: 'Text to PDF Converter (.TXT to PDF) — Free Online | Avatar PDF',
     metaDesc: 'Convert plain text notes and TXT files to formatted PDF documents online for free. Clean margins and typography.',
     keywords: ['text to pdf', 'txt to pdf converter', 'notepad to pdf', 'plain text to pdf'],
     category: 'convert-to',
@@ -1093,7 +1130,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'markdown-to-pdf',
     name: 'Markdown to PDF',
     shortDesc: 'Live Markdown editor with GitHub Flavored Markdown (GFM) styling exported to PDF.',
-    metaTitle: 'Markdown to PDF Converter — Live GFM Editor to PDF | DocuVortix',
+    metaTitle: 'Markdown to PDF Converter — Live GFM Editor to PDF | Avatar PDF',
     metaDesc: 'Convert Markdown to PDF online for free. Live side-by-side GFM editor with tables, syntax blocks, and headings exported to beautiful PDF.',
     keywords: ['markdown to pdf', 'md to pdf converter', 'gfm to pdf', 'markdown editor to pdf'],
     category: 'convert-to',
@@ -1123,7 +1160,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'code-to-pdf',
     name: 'Code to PDF',
     shortDesc: 'Convert source code files with syntax styling, line numbers, and monospaced typography.',
-    metaTitle: 'Code to PDF Converter — Source Code with Syntax Highlighting | DocuVortix',
+    metaTitle: 'Code to PDF Converter — Source Code with Syntax Highlighting | Avatar PDF',
     metaDesc: 'Convert source code (.js, .py, .java, .cpp, .html, .css) to PDF online for free. Features line numbers, monospaced font, and clean theme.',
     keywords: ['code to pdf', 'source code to pdf', 'syntax highlighted pdf', 'programming code to pdf'],
     category: 'convert-to',
@@ -1153,7 +1190,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'crop-pdf',
     name: 'Crop PDF',
     shortDesc: 'Interactive canvas crop box to trim margins, remove unwanted borders, or zoom into content.',
-    metaTitle: 'Crop PDF Pages Online — Trim Margins & Cut Borders Free | DocuVortix',
+    metaTitle: 'Crop PDF Pages Online — Trim Margins & Cut Borders Free | Avatar PDF',
     metaDesc: 'Crop PDF pages online for free. Interactive crop bounding box to trim margins, cut unwanted header/footers, and resize page viewports.',
     keywords: ['crop pdf', 'trim pdf margins', 'cut pdf borders', 'crop pdf pages online'],
     category: 'organize',
@@ -1183,7 +1220,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'resize-pdf',
     name: 'Resize PDF Pages',
     shortDesc: 'Scale and fit PDF pages to standard paper dimensions (A4, A3, Letter, Legal, Tabloid).',
-    metaTitle: 'Resize PDF Pages Online — Convert to A4, Letter, Legal Paper | DocuVortix',
+    metaTitle: 'Resize PDF Pages Online — Convert to A4, Letter, Legal Paper | Avatar PDF',
     metaDesc: 'Resize PDF page dimensions online for free. Change PDF paper size to A4, Letter, Legal, A3, or Tabloid with automatic aspect ratio scaling.',
     keywords: ['resize pdf', 'change pdf page size', 'convert pdf to a4', 'pdf letter to a4'],
     category: 'organize',
@@ -1213,7 +1250,7 @@ export const TOOLS: ToolDefinition[] = [
     slug: 'deskew-pdf',
     name: 'Deskew & Clean Scan',
     shortDesc: 'Enhance contrast, binarize text, and remove background noise from scanned documents.',
-    metaTitle: 'Clean Scanned PDF Online — Enhance Contrast & Remove Noise | DocuVortix',
+    metaTitle: 'Clean Scanned PDF Online — Enhance Contrast & Remove Noise | Avatar PDF',
     metaDesc: 'Clean and enhance scanned PDF documents online. Auto-adjust contrast, remove background yellowing, and sharpen scanned text.',
     keywords: ['clean scanned pdf', 'deskew pdf', 'enhance scanned document', 'remove scan noise pdf'],
     category: 'optimize',

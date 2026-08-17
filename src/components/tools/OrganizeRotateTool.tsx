@@ -55,8 +55,8 @@ export const OrganizeRotateTool: React.FC<OrganizeRotateToolProps> = ({ tool }) 
     author: '',
     subject: '',
     keywords: '',
-    creator: 'DocuVortix Studio',
-    producer: 'DocuVortix PDF Engine'
+    creator: 'Avatar PDF Studio',
+    producer: 'Avatar PDF Engine'
   });
 
   useEffect(() => {

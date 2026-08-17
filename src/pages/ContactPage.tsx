@@ -18,7 +18,7 @@ export const ContactPage: React.FC = () => {
           <MessageSquare className="w-4 h-4" /> Support &amp; Feedback
         </div>
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-          Contact the DocuVortix Team
+          Contact the Avatar PDF Team
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
           Have a question, feature request, or partnership inquiry? Drop us a message below.

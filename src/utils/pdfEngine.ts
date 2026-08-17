@@ -16,7 +16,9 @@ import {
   EncryptionSettings, 
   MetadataSettings,
   PdfPagePreview,
-  AnnotationObject
+  AnnotationObject,
+  NUpSettings,
+  CleanBgWatermarkSettings
 } from '../types';
 import { hexToRgb } from './fileHelpers';
 
@@ -64,7 +66,8 @@ export async function renderPageToCanvas(
  */
 export async function generatePdfThumbnails(
   buffer: ArrayBuffer, 
-  maxPages = 100
+  maxPages = 100,
+  sourceFileId?: string
 ): Promise<PdfPagePreview[]> {
   const pdfJsDoc = await loadPdfJsDoc(buffer);
   const total = Math.min(pdfJsDoc.numPages, maxPages);
@@ -78,7 +81,9 @@ export async function generatePdfThumbnails(
       rotation: 0,
       selected: true,
       width: canvas.width,
-      height: canvas.height
+      height: canvas.height,
+      sourceFileId,
+      sourcePageIndex: i - 1
     });
   }
 
@@ -101,7 +106,83 @@ export async function mergePdfs(buffers: ArrayBuffer[]): Promise<Uint8Array> {
 }
 
 /**
- * Split a PDF by page ranges (e.g. [[1,2], [3,5]]) or extract specific pages
+ * Advanced Merge: Combine selected pages from multiple PDFs and optionally insert images
+ */
+export interface AdvancedMergeItem {
+  type: 'pdf-page' | 'image';
+  pdfBuffer?: ArrayBuffer;
+  pageIndex?: number; // 0-indexed
+  imageFile?: File;
+  imageDataUrl?: string;
+  rotation?: number;
+}
+
+export async function mergePdfsAdvanced(items: AdvancedMergeItem[]): Promise<Uint8Array> {
+  const mergedPdf = await PDFDocument.create();
+
+  // Cache loaded PDFDocuments to avoid re-parsing same buffer
+  const docCache = new Map<ArrayBuffer, PDFDocument>();
+
+  for (const item of items) {
+    if (item.type === 'pdf-page' && item.pdfBuffer && item.pageIndex !== undefined) {
+      let srcDoc = docCache.get(item.pdfBuffer);
+      if (!srcDoc) {
+        srcDoc = await PDFDocument.load(item.pdfBuffer, { ignoreEncryption: true });
+        docCache.set(item.pdfBuffer, srcDoc);
+      }
+      if (item.pageIndex >= 0 && item.pageIndex < srcDoc.getPageCount()) {
+        const [copiedPage] = await mergedPdf.copyPages(srcDoc, [item.pageIndex]);
+        if (item.rotation) {
+          const cur = copiedPage.getRotation().angle;
+          copiedPage.setRotation(deg((cur + item.rotation) % 360));
+        }
+        mergedPdf.addPage(copiedPage);
+      }
+    } else if (item.type === 'image' && (item.imageFile || item.imageDataUrl)) {
+      let embeddedImg;
+      if (item.imageFile) {
+        const imgBuffer = await item.imageFile.arrayBuffer();
+        if (item.imageFile.type.includes('png') || item.imageFile.name.toLowerCase().endsWith('.png')) {
+          embeddedImg = await mergedPdf.embedPng(imgBuffer);
+        } else {
+          embeddedImg = await mergedPdf.embedJpg(imgBuffer);
+        }
+      } else if (item.imageDataUrl) {
+        const base64 = item.imageDataUrl.split(',')[1];
+        const bytes = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+        if (item.imageDataUrl.includes('png')) {
+          embeddedImg = await mergedPdf.embedPng(bytes);
+        } else {
+          embeddedImg = await mergedPdf.embedJpg(bytes);
+        }
+      }
+
+      if (embeddedImg) {
+        const imgW = embeddedImg.width;
+        const imgH = embeddedImg.height;
+        const pageW = PageSizes.A4[0];
+        const pageH = PageSizes.A4[1];
+        const margin = 20;
+        const scale = Math.min((pageW - margin * 2) / imgW, (pageH - margin * 2) / imgH);
+        const drawW = imgW * scale;
+        const drawH = imgH * scale;
+
+        const newPg = mergedPdf.addPage([pageW, pageH]);
+        newPg.drawImage(embeddedImg, {
+          x: (pageW - drawW) / 2,
+          y: (pageH - drawH) / 2,
+          width: drawW,
+          height: drawH
+        });
+      }
+    }
+  }
+
+  return await mergedPdf.save();
+}
+
+/**
+ * Split a PDF by page ranges or extract specific pages
  */
 export async function splitPdf(
   buffer: ArrayBuffer, 
@@ -160,7 +241,6 @@ export async function deletePdfPages(
   const total = doc.getPageCount();
   const deleteSet = new Set(pagesToDelete);
 
-  // Remove pages from highest index to lowest
   for (let i = total - 1; i >= 0; i--) {
     if (deleteSet.has(i + 1)) {
       doc.removePage(i);
@@ -416,7 +496,6 @@ export async function extractImagesFromPdf(buffer: ArrayBuffer): Promise<Blob> {
     }
   }
 
-  // Fallback: If no raw XObjects were extracted, rasterize high-res pages as images
   if (imageCounter === 1) {
     for (let i = 1; i <= pdfJsDoc.numPages; i++) {
       const canvas = await renderPageToCanvas(pdfJsDoc, i, 2.0);
@@ -532,7 +611,211 @@ export async function invertPdfColors(buffer: ArrayBuffer): Promise<Uint8Array> 
 }
 
 /**
- * Flatten PDF (burn interactive fields into flat page streams)
+ * Clean Background, Invert, or Erase Watermarks/Logos
+ */
+export async function cleanAndRemoveWatermarksFromPdf(
+  buffer: ArrayBuffer,
+  settings: CleanBgWatermarkSettings
+): Promise<Uint8Array> {
+  const pdfJsDoc = await loadPdfJsDoc(buffer);
+  const newDoc = await PDFDocument.create();
+
+  for (let i = 1; i <= pdfJsDoc.numPages; i++) {
+    const canvas = await renderPageToCanvas(pdfJsDoc, i, 2.0);
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+      // 1. Erase marked regions (watermarks / logos / stamps)
+      const pageRegions = settings.eraseRegions.filter(r => r.pageNumber === i);
+      pageRegions.forEach(reg => {
+        ctx.fillStyle = reg.color || '#ffffff';
+        // scale is 2.0
+        ctx.fillRect(reg.x * 2, reg.y * 2, reg.width * 2, reg.height * 2);
+      });
+
+      // 2. Clean Background or Invert
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const d = imgData.data;
+      const threshold = settings.bgThreshold || 215;
+      const contrast = settings.contrast || 1.1;
+      const brightness = settings.brightness || 0;
+
+      for (let j = 0; j < d.length; j += 4) {
+        let r = d[j];
+        let g = d[j + 1];
+        let b = d[j + 2];
+
+        if (settings.mode === 'invert') {
+          d[j] = 255 - r;
+          d[j + 1] = 255 - g;
+          d[j + 2] = 255 - b;
+        } else if (settings.mode === 'clean-bg') {
+          const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+          if (lum > threshold) {
+            // Whiten tinted or grayish background
+            d[j] = 255;
+            d[j + 1] = 255;
+            d[j + 2] = 255;
+          } else {
+            // Sharpen darker text
+            r = Math.min(255, Math.max(0, (r - 128) * contrast + 128 + brightness));
+            g = Math.min(255, Math.max(0, (g - 128) * contrast + 128 + brightness));
+            b = Math.min(255, Math.max(0, (b - 128) * contrast + 128 + brightness));
+            d[j] = r;
+            d[j + 1] = g;
+            d[j + 2] = b;
+          }
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
+    const embeddedImg = await newDoc.embedJpg(dataUrl);
+    const page = newDoc.addPage([canvas.width / 2, canvas.height / 2]);
+    page.drawImage(embeddedImg, {
+      x: 0,
+      y: 0,
+      width: canvas.width / 2,
+      height: canvas.height / 2
+    });
+  }
+
+  return await newDoc.save();
+}
+
+/**
+ * Standard paper size dimensions in points [width, height] in Portrait
+ */
+export const PAPER_DIMENSIONS: Record<string, [number, number]> = {
+  'A1': [1683.78, 2383.94],
+  'A2': [1190.55, 1683.78],
+  'A3': [841.89, 1190.55],
+  'A4': [595.28, 841.89],
+  'A5': [419.53, 595.28],
+  'Letter': [612.0, 792.0],
+  'Legal': [612.0, 1008.0],
+  'Tabloid': [792.0, 1224.0]
+};
+
+export async function nUpPdf(buffer: ArrayBuffer, pagesPerSheet: 2 | 4 | 8 = 2): Promise<Uint8Array> {
+  return await nUpAdvancedPdf(buffer, {
+    pagesPerSheet: pagesPerSheet === 8 ? 8 : (pagesPerSheet === 4 ? 4 : 2),
+    paperSize: 'A4',
+    orientation: 'portrait',
+    margin: 20,
+    padding: 8,
+    drawBorders: true,
+    addPageNumbers: true,
+    fitMode: 'contain'
+  });
+}
+
+/**
+ * Advanced N-Up Imposition (Multiple pages on one sheet with A1-A5 sizes, landscape/portrait, margin/padding)
+ */
+export async function nUpAdvancedPdf(
+  buffer: ArrayBuffer,
+  settings: NUpSettings
+): Promise<Uint8Array> {
+  const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+  const newDoc = await PDFDocument.create();
+  const font = await newDoc.embedFont(StandardFonts.Helvetica);
+  const totalPages = srcDoc.getPageCount();
+
+  const baseDims = PAPER_DIMENSIONS[settings.paperSize] || PAPER_DIMENSIONS['A4'];
+  const sheetWidth = settings.orientation === 'landscape' ? baseDims[1] : baseDims[0];
+  const sheetHeight = settings.orientation === 'landscape' ? baseDims[0] : baseDims[1];
+
+  let cols = 1;
+  let rows = 2;
+  if (settings.pagesPerSheet === 2) {
+    cols = settings.orientation === 'landscape' ? 2 : 1;
+    rows = settings.orientation === 'landscape' ? 1 : 2;
+  } else if (settings.pagesPerSheet === 4) {
+    cols = 2; rows = 2;
+  } else if (settings.pagesPerSheet === 6) {
+    cols = settings.orientation === 'landscape' ? 3 : 2;
+    rows = settings.orientation === 'landscape' ? 2 : 3;
+  } else if (settings.pagesPerSheet === 8) {
+    cols = settings.orientation === 'landscape' ? 4 : 2;
+    rows = settings.orientation === 'landscape' ? 2 : 4;
+  } else if (settings.pagesPerSheet === 9) {
+    cols = 3; rows = 3;
+  } else if (settings.pagesPerSheet === 16) {
+    cols = 4; rows = 4;
+  }
+
+  const margin = settings.margin || 20;
+  const padding = settings.padding || 8;
+
+  const usableWidth = sheetWidth - (margin * 2) - (padding * (cols - 1));
+  const usableHeight = sheetHeight - (margin * 2) - (padding * (rows - 1));
+
+  const cellWidth = usableWidth / cols;
+  const cellHeight = usableHeight / rows;
+
+  for (let i = 0; i < totalPages; i += settings.pagesPerSheet) {
+    const sheetPage = newDoc.addPage([sheetWidth, sheetHeight]);
+
+    for (let slot = 0; slot < settings.pagesPerSheet; slot++) {
+      const pageIndex = i + slot;
+      if (pageIndex >= totalPages) break;
+
+      const [embeddedPage] = await newDoc.embedPdf(srcDoc, [pageIndex]);
+      const col = slot % cols;
+      const row = rows - 1 - Math.floor(slot / cols);
+
+      const scale = Math.min(
+        cellWidth / embeddedPage.width,
+        cellHeight / embeddedPage.height
+      );
+
+      const drawWidth = embeddedPage.width * scale;
+      const drawHeight = embeddedPage.height * scale;
+
+      const cellX = margin + col * (cellWidth + padding);
+      const cellY = margin + row * (cellHeight + padding);
+
+      const posX = cellX + (cellWidth - drawWidth) / 2;
+      const posY = cellY + (cellHeight - drawHeight) / 2;
+
+      sheetPage.drawPage(embeddedPage, {
+        x: posX,
+        y: posY,
+        width: drawWidth,
+        height: drawHeight
+      });
+
+      if (settings.drawBorders) {
+        sheetPage.drawRectangle({
+          x: cellX,
+          y: cellY,
+          width: cellWidth,
+          height: cellHeight,
+          borderColor: rgb(0.7, 0.7, 0.7),
+          borderWidth: 0.75
+        });
+      }
+
+      if (settings.addPageNumbers) {
+        const pageNumText = `${pageIndex + 1}`;
+        sheetPage.drawText(pageNumText, {
+          x: cellX + cellWidth / 2 - 4,
+          y: cellY + 4,
+          size: 8,
+          font,
+          color: rgb(0.4, 0.4, 0.4)
+        });
+      }
+    }
+  }
+
+  return await newDoc.save();
+}
+
+/**
+ * Flatten PDF
  */
 export async function flattenPdf(buffer: ArrayBuffer): Promise<Uint8Array> {
   const doc = await PDFDocument.load(buffer, { ignoreEncryption: true });
@@ -546,78 +829,16 @@ export async function flattenPdf(buffer: ArrayBuffer): Promise<Uint8Array> {
 }
 
 /**
- * N-Up / Booklet Imposition layout (2, 4, 8 pages per sheet)
- */
-export async function nUpPdf(
-  buffer: ArrayBuffer, 
-  pagesPerSheet: 2 | 4 | 8 | 16
-): Promise<Uint8Array> {
-  const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
-  const newDoc = await PDFDocument.create();
-  const totalPages = srcDoc.getPageCount();
-
-  const sheetSize = PageSizes.A4; // [595.28, 841.89]
-  const sheetWidth = sheetSize[0];
-  const sheetHeight = sheetSize[1];
-
-  let cols = 1;
-  let rows = 2;
-  if (pagesPerSheet === 4) { cols = 2; rows = 2; }
-  if (pagesPerSheet === 8) { cols = 2; rows = 4; }
-  if (pagesPerSheet === 16) { cols = 4; rows = 4; }
-
-  const cellWidth = sheetWidth / cols;
-  const cellHeight = sheetHeight / rows;
-
-  for (let i = 0; i < totalPages; i += pagesPerSheet) {
-    const sheetPage = newDoc.addPage(sheetSize);
-    
-    for (let slot = 0; slot < pagesPerSheet; slot++) {
-      const pageIndex = i + slot;
-      if (pageIndex >= totalPages) break;
-
-      const [embeddedPage] = await newDoc.embedPdf(srcDoc, [pageIndex]);
-      const col = slot % cols;
-      const row = rows - 1 - Math.floor(slot / cols);
-
-      const scale = Math.min(
-        (cellWidth * 0.92) / embeddedPage.width,
-        (cellHeight * 0.92) / embeddedPage.height
-      );
-
-      const drawWidth = embeddedPage.width * scale;
-      const drawHeight = embeddedPage.height * scale;
-
-      const posX = col * cellWidth + (cellWidth - drawWidth) / 2;
-      const posY = row * cellHeight + (cellHeight - drawHeight) / 2;
-
-      sheetPage.drawPage(embeddedPage, {
-        x: posX,
-        y: posY,
-        width: drawWidth,
-        height: drawHeight
-      });
-    }
-  }
-
-  return await newDoc.save();
-}
-
-/**
  * Resize PDF pages to target standard size
  */
 export async function resizePdfPages(
   buffer: ArrayBuffer, 
-  targetSize: 'A4' | 'A3' | 'Letter' | 'Legal' | 'Tabloid'
+  targetSize: 'A4' | 'A1' | 'A2' | 'A3' | 'A5' | 'Letter' | 'Legal' | 'Tabloid'
 ): Promise<Uint8Array> {
   const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const newDoc = await PDFDocument.create();
 
-  let targetDims = PageSizes.A4;
-  if (targetSize === 'A3') targetDims = PageSizes.A3;
-  if (targetSize === 'Letter') targetDims = PageSizes.Letter;
-  if (targetSize === 'Legal') targetDims = [612, 1008];
-  if (targetSize === 'Tabloid') targetDims = [792, 1224];
+  const targetDims = PAPER_DIMENSIONS[targetSize] || PageSizes.A4;
 
   for (let i = 0; i < srcDoc.getPageCount(); i++) {
     const [embeddedPage] = await newDoc.embedPdf(srcDoc, [i]);
@@ -663,7 +884,6 @@ export async function applyAnnotationsToPdf(
     const { height: pageHeight } = page.getSize();
     const { r, g, b } = hexToRgb(annot.color || '#000000');
 
-    // PDF coordinate system starts at bottom-left, while browser canvas starts at top-left
     const pdfY = pageHeight - annot.y - annot.height;
 
     if (annot.type === 'text' && annot.text) {

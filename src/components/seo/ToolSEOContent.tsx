@@ -79,7 +79,7 @@ export const ToolSEOContent: React.FC<ToolSEOContentProps> = ({ tool, onNavigate
               100% In-Browser Privacy
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Unlike cloud services that upload your confidential files to remote servers, DocuVortix processes everything locally in your browser memory.
+              Unlike cloud services that upload your confidential files to remote servers, Avatar PDF processes everything locally in your browser memory.
             </p>
           </div>
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">

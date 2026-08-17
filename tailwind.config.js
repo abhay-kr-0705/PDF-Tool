@@ -21,6 +21,14 @@ export default {
           900: '#312e81',
           950: '#1e1b4b',
         },
+        avatar: {
+          cyan: '#06b6d4',
+          indigo: '#6366f1',
+          purple: '#8b5cf6',
+          emerald: '#10b981',
+          rose: '#f43f5e',
+          amber: '#f59e0b'
+        },
         vortix: {
           cyan: '#06b6d4',
           indigo: '#6366f1',

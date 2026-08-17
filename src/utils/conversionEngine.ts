@@ -243,7 +243,7 @@ export async function convertPowerPointToPdf(file: File): Promise<Uint8Array> {
   doc.setTextColor(71, 85, 105);
   doc.text('Converted presentation deck', 60, 140);
   doc.text(`File Size: ${(file.size / 1024).toFixed(1)} KB`, 60, 170);
-  doc.text('Processed via DocuVortix High-Fidelity Engine', 60, 200);
+  doc.text('Processed via Avatar PDF High-Fidelity Engine', 60, 200);
 
   const pdfArrayBuffer = doc.output('arraybuffer');
   return new Uint8Array(pdfArrayBuffer);

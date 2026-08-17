@@ -10,7 +10,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-12 animate-in fade-in">
       <div className="text-center space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
-          <Sparkles className="w-4 h-4" /> About DocuVortix Studio
+          <Sparkles className="w-4 h-4" /> About Avatar PDF Studio
         </div>
         <h1 className="font-heading font-extrabold text-3xl sm:text-5xl text-slate-900 dark:text-white">
           Revolutionizing PDF Intelligence with <br />
@@ -19,7 +19,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           </span>
         </h1>
         <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          DocuVortix was built on a simple yet uncompromising principle: you should never have to upload confidential personal, financial, or legal documents to third-party servers just to compress, edit, or convert a PDF.
+          Avatar PDF was built on a simple yet uncompromising principle: you should never have to upload confidential personal, financial, or legal documents to third-party servers just to compress, edit, or convert a PDF.
         </p>
       </div>
 
@@ -65,7 +65,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           Traditional online PDF tools require you to upload megabytes of sensitive documents across the public internet to backend server clusters. This introduces serious privacy vulnerabilities, data breach risks, compliance issues (GDPR/HIPAA), and slow queue times.
         </p>
         <p>
-          DocuVortix eliminates backend document servers entirely. By leveraging modern browser capabilities including HTML5 Canvas, WebAssembly, Web Workers, PDF.js, and Tesseract OCR, all computations occur securely in your computer or phone memory. When you close the browser tab, your document data ceases to exist.
+          Avatar PDF eliminates backend document servers entirely. By leveraging modern browser capabilities including HTML5 Canvas, WebAssembly, Web Workers, PDF.js, and Tesseract OCR, all computations occur securely in your computer or phone memory. When you close the browser tab, your document data ceases to exist.
         </p>
       </div>
 
