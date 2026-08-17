@@ -11,6 +11,7 @@ import { TermsPage } from './pages/TermsPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
 import { SitemapPage } from './pages/SitemapPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -47,9 +48,14 @@ export function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Known top-level pages
+  const isKnownInfoPage = ['about', 'privacy', 'terms', 'faq', 'contact', 'sitemap'].includes(currentPath);
+  const isHomePage = currentPath === '' || currentPath === '/';
+  const activeTool = getToolBySlug(currentPath);
+  const is404 = !isHomePage && !activeTool && !isKnownInfoPage;
+
   // Update dynamic SEO title and meta description
   useEffect(() => {
-    const activeTool = getToolBySlug(currentPath);
     if (activeTool) {
       document.title = activeTool.metaTitle;
       const metaDesc = document.querySelector('meta[name="description"]');
@@ -66,12 +72,14 @@ export function App() {
       document.title = 'Contact Support & Feedback | Avatar PDF';
     } else if (currentPath === 'sitemap') {
       document.title = 'Complete HTML Sitemap of 40+ PDF Tools | Avatar PDF';
-    } else {
+    } else if (isHomePage) {
       document.title = 'Avatar PDF — Universal Client-Side PDF Intelligence Suite';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', '100% Free & Private Online PDF Tools. Compress, Merge, Split, Convert (Word, Excel, PPT, Image, HTML), Edit Scanned PDFs with OCR, Sign, and Protect directly in your browser.');
+    } else {
+      document.title = '404 Page Not Found — Avatar PDF';
     }
-  }, [currentPath]);
+  }, [currentPath, activeTool, isHomePage, is404]);
 
   const handleNavigate = (slug: string) => {
     const cleanSlug = slug.replace(/^\//, '').trim();
@@ -83,9 +91,6 @@ export function App() {
   const toggleTheme = () => {
     setIsDarkMode(prev => !prev);
   };
-
-  // Resolve active tool if path matches
-  const activeTool = getToolBySlug(currentPath);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
@@ -114,7 +119,7 @@ export function App() {
           <ContactPage />
         ) : currentPath === 'sitemap' ? (
           <SitemapPage onNavigate={handleNavigate} />
-        ) : (
+        ) : isHomePage ? (
           /* Landing Home Page */
           <>
             <HeroSection
@@ -127,6 +132,9 @@ export function App() {
               onClearSearch={() => setSearchQuery('')}
             />
           </>
+        ) : (
+          /* 404 Not Found Page */
+          <NotFoundPage currentPath={currentPath} onNavigate={handleNavigate} />
         )}
       </main>
 
@@ -137,3 +145,4 @@ export function App() {
 }
 
 export default App;
+

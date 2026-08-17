@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="avatarPdfGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="40%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="avatarFoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#4f46e5" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded canvas for app icon context -->
+  <rect width="512" height="512" rx="128" fill="#0f172a" />
+  
+  <!-- Outer Document Border Frame with Folded Corner -->
+  <g filter="url(#glow)">
+    <!-- Document Main Body -->
+    <path 
+      d="M 120 100 
+         L 320 100 
+         L 400 180 
+         L 400 400 
+         A 20 20 0 0 1 380 420 
+         L 132 420 
+         A 20 20 0 0 1 112 400 
+         L 112 120 
+         A 20 20 0 0 1 132 100 Z" 
+      stroke="url(#avatarPdfGrad)" 
+      stroke-width="24" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+      fill="#0f172a"
+      fill-opacity="0.6"
+    />
+
+    <!-- Folded Corner Flap -->
+    <path 
+      d="M 312 100 
+         L 312 184 
+         A 8 8 0 0 0 320 192 
+         L 404 192" 
+      stroke="url(#avatarFoldGrad)" 
+      stroke-width="22" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+      fill="url(#avatarPdfGrad)"
+      fill-opacity="0.25"
+    />
+
+    <!-- Avatar Head -->
+    <circle 
+      cx="248" 
+      cy="236" 
+      r="44" 
+      stroke="url(#avatarPdfGrad)" 
+      stroke-width="22" 
+      fill="none" 
+      stroke-linecap="round"
+    />
+
+    <!-- Avatar Shoulders / Body -->
+    <path 
+      d="M 168 376 
+         C 168 316, 204 300, 248 300 
+         C 292 300, 328 316, 328 376" 
+      stroke="url(#avatarPdfGrad)" 
+      stroke-width="22" 
+      stroke-linecap="round" 
+      fill="none"
+    />
+
+    <!-- Geometric PDF accent mark / corner diagonal -->
+    <line 
+      x1="270" 
+      y1="340" 
+      x2="384" 
+      y2="404" 
+      stroke="url(#avatarFoldGrad)" 
+      stroke-width="14" 
+      stroke-linecap="round" 
+    />
+  </g>
+</svg>
