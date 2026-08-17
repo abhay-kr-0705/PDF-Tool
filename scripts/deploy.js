@@ -32,20 +32,7 @@ console.log('   Avatar PDF — Hostinger 1-Click Terminal Deploy');
 console.log('=================================================\n');
 
 if (!host || !user || !password) {
-  console.error('❌ Missing Hostinger FTP Credentials!\n');
-  console.log('👉 To enable 1-click terminal deployment:');
-  console.log('   1. Create a file named .env.deploy in the project root:');
-  console.log('      (or copy .env.deploy.example -> .env.deploy)');
-  console.log('\n   2. Add your Hostinger FTP details inside .env.deploy:');
-  console.log('      HOSTINGER_FTP_HOST=ftp.avatarpdf.com');
-  console.log('      HOSTINGER_FTP_USER=your_ftp_username');
-  console.log('      HOSTINGER_FTP_PASSWORD=your_ftp_password');
-  console.log('      HOSTINGER_REMOTE_DIR=public_html');
-  console.log('\n   3. Where to find FTP credentials in Hostinger:');
-  console.log('      • Log in to Hostinger hPanel');
-  console.log('      • Go to Websites -> Manage -> Files -> FTP Accounts');
-  console.log('      • Copy FTP IP/Host, Username, and Password');
-  console.log('\n   4. Run: npm run deploy\n');
+  console.error('❌ Missing Hostinger FTP Credentials in .env.deploy!\n');
   process.exit(1);
 }
 
@@ -81,25 +68,49 @@ async function deploy() {
     });
     console.log('✅ Connected to Hostinger server successfully.\n');
 
-    // Step 3: Navigate to remote directory
-    console.log(`📂 Step 3: Uploading dist/ to "${remoteDir}" on Hostinger...`);
-    await client.ensureDir(remoteDir);
-    await client.clearWorkingDir(); // Clean previous build to prevent leftover old hashes
+    // Step 3: Smart Working Directory Detection
+    const currentPwd = await client.pwd();
+    console.log(`📂 Remote Current Directory: ${currentPwd}`);
 
-    // Step 4: Upload all files & folders from dist
+    if (currentPwd.endsWith('public_html')) {
+      // User is already in public_html root
+      console.log('✅ Already at website root (public_html).');
+    } else {
+      console.log(`Navigating to "${remoteDir}"...`);
+      await client.ensureDir(remoteDir);
+    }
+
+    // Clean up Hostinger default.php placeholder or stray nested folders if present
+    try {
+      await client.remove('default.php');
+      console.log('🧹 Cleaned Hostinger default placeholder page (default.php)');
+    } catch (e) {
+      // Ignore if not present
+    }
+
+    try {
+      await client.removeDir('public_html');
+      console.log('🧹 Cleaned nested public_html directory');
+    } catch (e) {
+      // Ignore
+    }
+
+    // Step 4: Upload all files & folders from dist directly to root
+    console.log(`\n📤 Step 4: Uploading all production files from dist/ to website root...`);
     client.trackProgress(info => {
       process.stdout.write(`\r   Uploading: ${info.name} (${(info.bytesOverall / 1024).toFixed(1)} KB uploaded)`);
     });
 
     await client.uploadFromDir(distDir);
-    console.log('\n\n✨ Step 4: All files uploaded successfully!');
+    console.log('\n\n✨ All files uploaded directly to website root successfully!');
     console.log('\n=================================================');
     console.log('🎉 DEPLOYMENT SUCCESSFUL!');
-    console.log('🌐 Your website is live at: https://avatarpdf.com');
+    console.log('🌐 Live Website : https://avatarpdf.com');
+    console.log('🗺️ Live Sitemap : https://avatarpdf.com/sitemap.xml');
+    console.log('🤖 Live Robots  : https://avatarpdf.com/robots.txt');
     console.log('=================================================\n');
   } catch (error) {
     console.error('\n❌ Deployment Error:', error.message || error);
-    console.log('\n💡 Tip: If connection fails with TLS/Secure error, set HOSTINGER_FTP_SECURE=false in .env.deploy');
     process.exit(1);
   } finally {
     client.close();
