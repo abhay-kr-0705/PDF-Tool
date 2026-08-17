@@ -61,23 +61,23 @@ export function App() {
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', activeTool.metaDesc);
     } else if (currentPath === 'about') {
-      document.title = 'About Avatar PDF — 100% In-Browser PDF Intelligence';
+      document.title = 'About Us | Avatar PDF';
     } else if (currentPath === 'privacy') {
-      document.title = 'Privacy Policy — Zero Server Retention Guarantee | Avatar PDF';
+      document.title = 'Privacy Policy | Avatar PDF';
     } else if (currentPath === 'terms') {
       document.title = 'Terms of Service | Avatar PDF';
     } else if (currentPath === 'faq') {
-      document.title = 'PDF Help & FAQ Knowledge Hub | Avatar PDF';
+      document.title = 'Frequently Asked Questions & PDF Help | Avatar PDF';
     } else if (currentPath === 'contact') {
-      document.title = 'Contact Support & Feedback | Avatar PDF';
+      document.title = 'Contact Us | Avatar PDF';
     } else if (currentPath === 'sitemap') {
-      document.title = 'Complete HTML Sitemap of 40+ PDF Tools | Avatar PDF';
+      document.title = 'All PDF Tools Index & Sitemap | Avatar PDF';
     } else if (isHomePage) {
-      document.title = 'Avatar PDF — Universal Client-Side PDF Intelligence Suite';
+      document.title = 'Avatar PDF | Online PDF tools for PDF lovers';
       const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) metaDesc.setAttribute('content', '100% Free & Private Online PDF Tools. Compress, Merge, Split, Convert (Word, Excel, PPT, Image, HTML), Edit Scanned PDFs with OCR, Sign, and Protect directly in your browser.');
+      if (metaDesc) metaDesc.setAttribute('content', 'Avatar PDF is an online service to work with PDF files completely free and easy to use. Merge PDF, split PDF, compress PDF, convert Office to PDF, PDF to JPG, edit scanned PDFs with OCR, sign, and protect documents directly in your browser.');
     } else {
-      document.title = '404 Page Not Found — Avatar PDF';
+      document.title = '404 Page Not Found | Avatar PDF';
     }
   }, [currentPath, activeTool, isHomePage, is404]);
 
