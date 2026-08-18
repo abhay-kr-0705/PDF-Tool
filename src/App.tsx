@@ -26,14 +26,31 @@ export function App() {
     return '';
   });
 
+  // Automatically detect device theme preference (Dark or Light)
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('avatarpdf_theme') || localStorage.getItem('docuvortix_theme');
+      const saved = localStorage.getItem('avatarpdf_theme');
       if (saved) return saved === 'dark';
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     return false;
   });
+
+  // Listen to OS / Device theme changes in real-time
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleDeviceThemeChange = (e: MediaQueryListEvent) => {
+      const manual = localStorage.getItem('avatarpdf_theme_manual');
+      if (!manual) {
+        setIsDarkMode(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleDeviceThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleDeviceThemeChange);
+  }, []);
 
   // Apply dark mode class to <html>
   useEffect(() => {
@@ -165,7 +182,7 @@ export function App() {
 
     } else if (currentPath === 'about') {
       document.title = 'About Us — Avatar PDF | #1 Free & Private PDF Studio';
-      setMeta('meta[name="description"]', 'Learn about Avatar PDF, the world’s most private, client-side online PDF intelligence platform built with WebAssembly.');
+      setMeta('meta[name="description"]', 'Learn about Avatar PDF, the free online PDF tools suite built with WebAssembly for private, in-browser document processing.');
       setCanonical('https://avatarpdf.com/about');
     } else if (currentPath === 'privacy') {
       document.title = 'Privacy Policy — 100% Client-Side Zero Server Retention | Avatar PDF';
@@ -204,6 +221,7 @@ export function App() {
   };
 
   const toggleTheme = () => {
+    localStorage.setItem('avatarpdf_theme_manual', 'true');
     setIsDarkMode(prev => !prev);
   };
 

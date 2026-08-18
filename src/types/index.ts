@@ -61,12 +61,15 @@ export interface PdfPagePreview {
   imageData?: string;
 }
 
-export type CompressionLevel = 'lossless' | 'balanced' | 'extreme' | 'scanned';
+export type CompressionMode = 'preset' | 'target-size';
+export type CompressionLevel = 'lossless' | 'light' | 'balanced' | 'aggressive' | 'extreme' | 'scanned';
 
 export interface CompressionSettings {
+  mode?: CompressionMode;
   level: CompressionLevel;
+  targetSizeKb?: number;
   imageQuality: number; // 0.1 - 1.0
-  dpi: number; // 72, 150, 300
+  dpi: number; // 72, 110, 150, 300
   removeMetadata: boolean;
   flattenForms: boolean;
   grayscale: boolean;
