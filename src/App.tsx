@@ -18,7 +18,14 @@ export function App() {
     return window.location.pathname.replace(/^\//, '') || '';
   });
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('q') || '';
+    }
+    return '';
+  });
+
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('avatarpdf_theme') || localStorage.getItem('docuvortix_theme');
@@ -43,6 +50,8 @@ export function App() {
   useEffect(() => {
     const handlePopState = () => {
       setCurrentPath(window.location.pathname.replace(/^\//, '') || '');
+      const params = new URLSearchParams(window.location.search);
+      setSearchQuery(params.get('q') || '');
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -54,28 +63,134 @@ export function App() {
   const activeTool = getToolBySlug(currentPath);
   const is404 = !isHomePage && !activeTool && !isKnownInfoPage;
 
-  // Update dynamic SEO title and meta description
+  // Comprehensive Dynamic SEO & JSON-LD Structured Schema Injection
   useEffect(() => {
+    // Helper to safely set meta tag content
+    const setMeta = (selector: string, content: string) => {
+      let element = document.querySelector(selector);
+      if (element) {
+        element.setAttribute('content', content);
+      }
+    };
+
+    const setCanonical = (url: string) => {
+      let link = document.querySelector('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', url);
+    };
+
+    // Remove any previously injected dynamic tool JSON-LD schema
+    const oldDynamicSchema = document.getElementById('dynamic-tool-jsonld');
+    if (oldDynamicSchema) {
+      oldDynamicSchema.remove();
+    }
+
     if (activeTool) {
       document.title = activeTool.metaTitle;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) metaDesc.setAttribute('content', activeTool.metaDesc);
+      setMeta('meta[name="description"]', activeTool.metaDesc);
+      setMeta('meta[name="keywords"]', activeTool.keywords.join(', ') + ', ilovepdf alternative, free online pdf tools, private in-browser pdf');
+      
+      const toolUrl = `https://avatarpdf.com/${activeTool.slug}`;
+      setCanonical(toolUrl);
+
+      // OpenGraph
+      setMeta('meta[property="og:title"]', activeTool.metaTitle);
+      setMeta('meta[property="og:description"]', activeTool.metaDesc);
+      setMeta('meta[property="og:url"]', toolUrl);
+
+      // Twitter
+      setMeta('meta[name="twitter:title"]', activeTool.metaTitle);
+      setMeta('meta[name="twitter:description"]', activeTool.metaDesc);
+      setMeta('meta[name="twitter:url"]', toolUrl);
+
+      // Inject Tool-Specific JSON-LD Schemas (HowTo, FAQPage, BreadcrumbList, WebApplication)
+      const dynamicSchemaScript = document.createElement('script');
+      dynamicSchemaScript.id = 'dynamic-tool-jsonld';
+      dynamicSchemaScript.type = 'application/ld+json';
+      
+      const dynamicSchemas = [
+        // 1. BreadcrumbList Schema
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://avatarpdf.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": activeTool.name,
+              "item": toolUrl
+            }
+          ]
+        },
+        // 2. HowTo Schema
+        {
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": `How to use ${activeTool.name} online for free`,
+          "description": activeTool.shortDesc,
+          "step": activeTool.howToSteps.map((step, idx) => ({
+            "@type": "HowToStep",
+            "position": idx + 1,
+            "name": step.title,
+            "text": step.desc
+          }))
+        },
+        // 3. FAQPage Schema for Tool Page
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": activeTool.faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.q,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.a
+            }
+          }))
+        }
+      ];
+
+      dynamicSchemaScript.text = JSON.stringify(dynamicSchemas);
+      document.head.appendChild(dynamicSchemaScript);
+
     } else if (currentPath === 'about') {
-      document.title = 'About Us | Avatar PDF';
+      document.title = 'About Us — Avatar PDF | #1 Free & Private PDF Studio';
+      setMeta('meta[name="description"]', 'Learn about Avatar PDF, the world’s most private, client-side online PDF intelligence platform built with WebAssembly.');
+      setCanonical('https://avatarpdf.com/about');
     } else if (currentPath === 'privacy') {
-      document.title = 'Privacy Policy | Avatar PDF';
+      document.title = 'Privacy Policy — 100% Client-Side Zero Server Retention | Avatar PDF';
+      setMeta('meta[name="description"]', 'Avatar PDF zero server retention policy. Your files are processed 100% locally in your browser memory and never uploaded to any remote server.');
+      setCanonical('https://avatarpdf.com/privacy');
     } else if (currentPath === 'terms') {
       document.title = 'Terms of Service | Avatar PDF';
+      setMeta('meta[name="description"]', 'Terms of service and usage conditions for Avatar PDF online productivity tools.');
+      setCanonical('https://avatarpdf.com/terms');
     } else if (currentPath === 'faq') {
-      document.title = 'Frequently Asked Questions & PDF Help | Avatar PDF';
+      document.title = 'Frequently Asked Questions & PDF Help Center | Avatar PDF';
+      setMeta('meta[name="description"]', 'Common questions and answers regarding merging, compressing, converting Word to PDF, OCR scanned documents, and privacy on Avatar PDF.');
+      setCanonical('https://avatarpdf.com/faq');
     } else if (currentPath === 'contact') {
-      document.title = 'Contact Us | Avatar PDF';
+      document.title = 'Contact Support & Feedback | Avatar PDF';
+      setMeta('meta[name="description"]', 'Get in touch with the Avatar PDF engineering and product team for support, questions, or custom feature requests.');
+      setCanonical('https://avatarpdf.com/contact');
     } else if (currentPath === 'sitemap') {
-      document.title = 'All PDF Tools Index & Sitemap | Avatar PDF';
+      document.title = 'All 41+ Free PDF Tools Directory & HTML Sitemap | Avatar PDF';
+      setMeta('meta[name="description"]', 'Complete directory and sitemap of all 41+ free, client-side PDF tools available on Avatar PDF.');
+      setCanonical('https://avatarpdf.com/sitemap');
     } else if (isHomePage) {
-      document.title = 'Avatar PDF | Online PDF tools for PDF lovers';
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) metaDesc.setAttribute('content', 'Avatar PDF is an online service to work with PDF files completely free and easy to use. Merge PDF, split PDF, compress PDF, convert Office to PDF, PDF to JPG, edit scanned PDFs with OCR, sign, and protect documents directly in your browser.');
+      document.title = 'Avatar PDF | Free Online PDF Tools — Merge, Compress, Convert, Edit & Sign PDF';
+      setMeta('meta[name="description"]', 'Avatar PDF is the #1 free, 100% private online PDF service. Merge PDF, split PDF, compress PDF, PDF to Word, Word to PDF, JPG to PDF, edit scanned PDFs with OCR, sign, watermark, and protect documents with zero server uploads.');
+      setCanonical('https://avatarpdf.com/');
     } else {
       document.title = '404 Page Not Found | Avatar PDF';
     }
@@ -125,6 +240,7 @@ export function App() {
             <HeroSection
               onNavigate={handleNavigate}
               onSearch={setSearchQuery}
+              initialQuery={searchQuery}
             />
             <ToolGrid
               onSelectTool={handleNavigate}
@@ -145,4 +261,3 @@ export function App() {
 }
 
 export default App;
-

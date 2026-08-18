@@ -18,12 +18,15 @@ export const ToolGrid: React.FC<ToolGridProps> = ({
 }) => {
   const [activeCategory, setActiveCategory] = useState<ToolCategory>('all');
 
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+
   const filteredTools = TOOLS.filter(tool => {
-    const matchesCategory = activeCategory === 'all' || tool.category === activeCategory;
-    const matchesSearch = !searchQuery.trim() || 
-      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tool.keywords.some(k => k.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory = !normalizedQuery ? (activeCategory === 'all' || tool.category === activeCategory) : true;
+    const matchesSearch = !normalizedQuery || 
+      tool.name.toLowerCase().includes(normalizedQuery) ||
+      tool.slug.toLowerCase().includes(normalizedQuery) ||
+      tool.shortDesc.toLowerCase().includes(normalizedQuery) ||
+      (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(normalizedQuery) || normalizedQuery.includes(k.toLowerCase())));
 
     return matchesCategory && matchesSearch;
   });
@@ -34,11 +37,14 @@ export const ToolGrid: React.FC<ToolGridProps> = ({
       {/* Category Pills Header */}
       <div className="flex items-center justify-center gap-1.5 flex-wrap">
         {CATEGORIES.map((cat) => {
-          const isActive = activeCategory === cat.id;
+          const isActive = activeCategory === cat.id && !normalizedQuery;
           return (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id as ToolCategory)}
+              onClick={() => {
+                if (normalizedQuery) onClearSearch();
+                setActiveCategory(cat.id as ToolCategory);
+              }}
               className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
                 isActive 
                   ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm' 
@@ -52,16 +58,16 @@ export const ToolGrid: React.FC<ToolGridProps> = ({
       </div>
 
       {/* Search status header (if query exists) */}
-      {searchQuery && (
+      {normalizedQuery && (
         <div className="flex items-center justify-between p-3 rounded-xl bg-indigo-50 dark:bg-slate-900 border border-indigo-200 dark:border-slate-800 text-xs sm:text-sm">
           <span className="text-slate-700 dark:text-slate-300">
-            Results for &ldquo;<strong>{searchQuery}</strong>&rdquo; ({filteredTools.length} tools)
+            Matching tools for &ldquo;<strong>{searchQuery}</strong>&rdquo; ({filteredTools.length} found)
           </span>
           <button 
             onClick={onClearSearch}
             className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
           >
-            Clear <X className="w-3 h-3" />
+            Clear Search <X className="w-3 h-3" />
           </button>
         </div>
       )}
@@ -86,7 +92,7 @@ export const ToolGrid: React.FC<ToolGridProps> = ({
             No matching tools found
           </h3>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
-            Try searching for &ldquo;word&rdquo;, &ldquo;compress&rdquo;, &ldquo;merge&rdquo;, &ldquo;sign&rdquo;, or &ldquo;watermark&rdquo;.
+            Try searching for &ldquo;merge&rdquo;, &ldquo;compress 100kb&rdquo;, &ldquo;photo se pdf&rdquo;, &ldquo;sign&rdquo;, or &ldquo;word to pdf&rdquo;.
           </p>
           <button
             onClick={() => {
@@ -95,7 +101,7 @@ export const ToolGrid: React.FC<ToolGridProps> = ({
             }}
             className="px-4 py-2 rounded-xl bg-indigo-600 text-white font-semibold text-xs shadow hover:bg-indigo-700 transition-colors"
           >
-            View All 40+ Tools
+            View All 41+ Tools
           </button>
         </div>
       )}

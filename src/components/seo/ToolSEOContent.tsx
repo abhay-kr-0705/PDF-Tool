@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { ToolDefinition } from '../../types';
 import { TOOLS } from '../../data/toolsData';
 import { IconRenderer } from '../common/IconRenderer';
-import { ChevronDown, ChevronUp, ShieldCheck, Zap, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { 
+  ChevronDown, 
+  ChevronUp, 
+  ShieldCheck, 
+  Zap, 
+  Lock, 
+  Sparkles, 
+  ArrowRight, 
+  CheckCircle2, 
+  XCircle,
+  Home,
+  ChevronRight
+} from 'lucide-react';
 
 interface ToolSEOContentProps {
   tool: ToolDefinition;
@@ -19,14 +31,34 @@ export const ToolSEOContent: React.FC<ToolSEOContentProps> = ({ tool, onNavigate
   return (
     <div className="mt-16 space-y-12 max-w-5xl mx-auto px-4 sm:px-6">
       
+      {/* 0. Breadcrumb Navigation for UX & SEO */}
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <button 
+          onClick={() => onNavigate('/')}
+          className="hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1 transition-colors"
+        >
+          <Home className="w-3.5 h-3.5" />
+          <span>Home</span>
+        </button>
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+        <button 
+          onClick={() => onNavigate('/sitemap')}
+          className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+        >
+          PDF Tools
+        </button>
+        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+        <span className="font-semibold text-slate-900 dark:text-white">{tool.name}</span>
+      </nav>
+
       {/* 1. Step-by-Step How-To Section */}
       <section className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm">
         <div className="mb-6">
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
-            How to use {tool.name} online
+            How to use {tool.name} online for free
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Follow these 3 simple steps to process your file in seconds
+            Follow these 3 simple steps to process your document in seconds with 100% privacy
           </p>
         </div>
 
@@ -79,7 +111,7 @@ export const ToolSEOContent: React.FC<ToolSEOContentProps> = ({ tool, onNavigate
               100% In-Browser Privacy
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Unlike cloud services that upload your confidential files to remote servers, Avatar PDF processes everything locally in your browser memory.
+              Unlike cloud services that upload your confidential files to remote servers, Avatar PDF processes everything locally in your browser memory via WebAssembly.
             </p>
           </div>
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
@@ -88,7 +120,78 @@ export const ToolSEOContent: React.FC<ToolSEOContentProps> = ({ tool, onNavigate
         </div>
       </section>
 
-      {/* 3. Comprehensive FAQ Section */}
+      {/* 3. Why Avatar PDF vs iLovePDF & Cloud Tools (Competitive Matrix) */}
+      <section className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+            Why Choose Avatar PDF over Other PDF Tools?
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+            See how Avatar PDF delivers superior privacy, unlimited free usage, and instant performance compared to traditional cloud tools like iLovePDF and SmallPDF.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold uppercase">
+                <th className="py-3 px-4">Feature / Benefit</th>
+                <th className="py-3 px-4 text-indigo-600 dark:text-indigo-400 font-extrabold">Avatar PDF (This Tool)</th>
+                <th className="py-3 px-4 text-slate-500">Other Cloud Tools (iLovePDF, etc.)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-slate-700 dark:text-slate-300">
+              <tr>
+                <td className="py-3 px-4 font-semibold">Document Privacy</td>
+                <td className="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4" /> 100% In-Browser (Zero Uploads)
+                </td>
+                <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
+                  <XCircle className="w-4 h-4 text-amber-500" /> Uploaded to remote cloud servers
+                </td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-semibold">Usage Limits &amp; Caps</td>
+                <td className="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4" /> 100% Free &amp; Unlimited
+                </td>
+                <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
+                  <XCircle className="w-4 h-4 text-amber-500" /> 2 tasks/hour or paywall
+                </td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-semibold">File Size Limits</td>
+                <td className="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4" /> No File Size Caps
+                </td>
+                <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
+                  <XCircle className="w-4 h-4 text-amber-500" /> Capped at 15MB - 25MB on free tier
+                </td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-semibold">Processing Speed</td>
+                <td className="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4" /> Instant Native WebAssembly
+                </td>
+                <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
+                  <XCircle className="w-4 h-4 text-amber-500" /> Server queue &amp; upload delays
+                </td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-semibold">Scanned OCR Editing</td>
+                <td className="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4" /> Full Client-Side OCR Included
+                </td>
+                <td className="py-3 px-4 text-slate-500 flex items-center gap-1.5">
+                  <XCircle className="w-4 h-4 text-amber-500" /> Paid Premium feature only
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 4. Comprehensive FAQ Section (Google PAA Snippet Target) */}
       <section className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
         <div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">
@@ -133,7 +236,7 @@ export const ToolSEOContent: React.FC<ToolSEOContentProps> = ({ tool, onNavigate
         </div>
       </section>
 
-      {/* 4. Related Tools Grid */}
+      {/* 5. Related Tools Grid */}
       {relatedTools.length > 0 && (
         <section className="space-y-4">
           <div className="flex items-center justify-between">
@@ -144,7 +247,7 @@ export const ToolSEOContent: React.FC<ToolSEOContentProps> = ({ tool, onNavigate
               onClick={() => onNavigate('/')}
               className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
             >
-              All 40+ Tools <ArrowRight className="w-3.5 h-3.5" />
+              All 41+ Tools <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 

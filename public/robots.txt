@@ -1,3 +1,21 @@
 User-agent: *
 Allow: /
+
+# Directives for major search crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Official Sitemap Location
 Sitemap: https://avatarpdf.com/sitemap.xml
