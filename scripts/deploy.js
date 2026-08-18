@@ -54,7 +54,7 @@ async function deploy() {
   }
 
   // Step 2: Connect to Hostinger FTP
-  const client = new ftp.Client();
+  const client = new ftp.Client(60000);
   client.ftp.verbose = false;
 
   try {

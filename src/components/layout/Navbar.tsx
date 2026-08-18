@@ -261,10 +261,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Search Bar */}
           <div ref={searchRef} className="relative hidden md:block max-w-xs w-full">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <form role="search" onSubmit={(e) => e.preventDefault()} autoComplete="off" className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
-                type="text"
+                type="search"
+                name="search_nav_desktop"
+                id="nav-search-desktop"
                 placeholder="Find a tool (e.g. watermark, compress)..."
                 value={searchQuery}
                 onChange={(e) => {
@@ -272,17 +274,26 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setIsSearchOpen(true);
                 }}
                 onFocus={() => setIsSearchOpen(true)}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck="false"
+                inputMode="search"
+                data-lpignore="true"
+                data-form-type="other"
                 className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400 text-slate-900 dark:text-white"
               />
               {searchQuery && (
                 <button 
+                  type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  aria-label="Clear search"
                 >
                   <X className="w-3 h-3" />
                 </button>
               )}
-            </div>
+            </form>
 
             {/* Desktop Autocomplete Results */}
             {isSearchOpen && normalizedQuery && (
@@ -342,25 +353,36 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div ref={mobileSearchRef} className="lg:hidden py-4 border-t border-slate-200 dark:border-slate-800 space-y-4 animate-in fade-in">
             
             {/* Mobile Search Input */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <form role="search" onSubmit={(e) => e.preventDefault()} autoComplete="off" className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
               <input
-                type="text"
+                type="search"
+                name="search_nav_mobile"
+                id="nav-search-mobile"
                 placeholder="Search any tool (e.g. watermark, compress, merge)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck="false"
+                inputMode="search"
+                data-lpignore="true"
+                data-form-type="other"
                 className="w-full pl-9 pr-8 py-2.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  aria-label="Clear search"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               )}
-            </div>
+            </form>
 
             {/* Mobile Live Search Results */}
             {normalizedQuery ? (

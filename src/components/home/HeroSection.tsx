@@ -79,14 +79,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onSearch, 
 
       {/* Prominent Fast Search Bar in Hero */}
       <div ref={searchContainerRef} className="max-w-xl mx-auto pt-1 space-y-2.5 relative z-30">
-        <div className="relative shadow-md rounded-2xl">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-indigo-500" />
+        <form 
+          role="search" 
+          onSubmit={(e) => e.preventDefault()} 
+          autoComplete="off"
+          className="relative shadow-md rounded-2xl"
+        >
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-indigo-500 pointer-events-none" />
           <input
-            type="text"
+            type="search"
+            name="search_pdf_tools"
+            id="hero-pdf-tool-search"
             value={localQuery}
             onChange={handleInputChange}
             onFocus={() => setIsDropdownOpen(true)}
             placeholder="Search any tool (e.g. merge, compress 100kb, photo se pdf, ocr, word)..."
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck="false"
+            inputMode="search"
+            data-lpignore="true"
+            data-form-type="other"
             className="w-full pl-12 pr-10 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-indigo-600 shadow-sm transition-all"
           />
           {localQuery && (
@@ -94,6 +108,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onSearch, 
               type="button"
               onClick={handleClear}
               className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1"
+              aria-label="Clear search"
             >
               <X className="w-4 h-4" />
             </button>
@@ -112,6 +127,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onSearch, 
                   {matchingTools.map((tool) => (
                     <button
                       key={tool.id}
+                      type="button"
                       onClick={() => handleSelectTool(tool.slug)}
                       className="w-full p-2.5 rounded-xl text-left flex items-center justify-between hover:bg-indigo-50 dark:hover:bg-slate-800/80 transition-colors group"
                     >
@@ -144,7 +160,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate, onSearch, 
               )}
             </div>
           )}
-        </div>
+        </form>
 
         {/* Quick Search Tag Pills */}
         <div className="flex items-center justify-center gap-1.5 flex-wrap text-xs">
